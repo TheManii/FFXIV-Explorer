@@ -161,7 +161,8 @@ public class SCD_File {
 		if (dataType == 0x06){
 			//Seek Table Header			
 			buffer.getShort();
-			int encodeByte = buffer.getShort();
+			int encodeByte = buffer.get();
+			buffer.get();			
 			buffer.getInt();
 			buffer.getInt();
 			buffer.getInt();

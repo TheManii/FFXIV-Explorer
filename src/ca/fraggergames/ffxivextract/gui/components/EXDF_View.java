@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.sql.SQLException;
 import java.util.Hashtable;
 
 import javax.swing.JScrollPane;
@@ -19,19 +20,29 @@ import ca.fraggergames.ffxivextract.models.EXHF_File;
 import ca.fraggergames.ffxivextract.models.SqPack_DatFile;
 import ca.fraggergames.ffxivextract.models.SqPack_IndexFile;
 import ca.fraggergames.ffxivextract.storage.HashDatabase;
+
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.border.TitledBorder;
+
 import java.awt.BorderLayout;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+
 import java.awt.Component;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.UIManager;
+
 import java.awt.Color;
+
 import javax.swing.border.EmptyBorder;
+
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -77,6 +88,7 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 		this.currentIndex = currentIndex;
 		
 		fullPath = fullPath.toLowerCase();
+		fullPath = fullPath.replace("null/", "");
 		
 		String exhName;
 		
@@ -98,29 +110,18 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 		String folderName = exhName.substring(0, fullPath.lastIndexOf("/"));
 		exhName = exhName.substring(fullPath.lastIndexOf("/")+1, exhName.length()) +".exh";
 		
+		String path = folderName +"/" +  exhName;
+		
 		//Find this thing
+		int hash = HashDatabase.computeCRC(path.getBytes(), 0, path.getBytes().length);
+		//int folderHash = HashDatabase.computeCRC(folderName.getBytes(), 0, folderName.getBytes().length);
+		//int fullPathHash = HashDatabase.computeCRC(exhName.getBytes(), 0, exhName.getBytes().length);
 		
-		int folderHash = HashDatabase.computeCRC(folderName.getBytes(), 0, folderName.getBytes().length);
-		int fullPathHash = HashDatabase.computeCRC(exhName.getBytes(), 0, exhName.getBytes().length);
 		
-		if (currentIndex.getPackFolders().length == 1)	
-			folderIndex = 0;
-		else
-		{
-			for (int i = 0; i < currentIndex.getPackFolders().length; i++)
-			{
-				if (currentIndex.getPackFolders()[i].getId() == folderHash)
-				{
-					folderIndex = i;
-					break;
-				}
-			}
-		}
-		
-		for (int j = 0; j < currentIndex.getPackFolders()[folderIndex].getFiles().length; j++)
+		for (int j = 0; j < currentIndex.getPackFolders()[0].getFiles().length; j++)
 		{
 			//Found it
-			if (currentIndex.getPackFolders()[folderIndex].getFiles()[j].getId() == fullPathHash)
+			if (currentIndex.getPackFolders()[folderIndex].getFiles()[j].getId() == hash)
 			{
 				try {
 					byte[] data = currentIndex.extractFile(currentIndex.getPackFolders()[folderIndex].getFiles()[j].getOffset(),  null);
@@ -162,7 +163,7 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 		this();
 		
 		fullPath = fullPath.toLowerCase();
-		
+		fullPath = fullPath.replace("null/", "");
 		this.currentIndex = currentIndex;
 		this.exhFile = file;		
 		
@@ -182,7 +183,7 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 		//Create the path to EXD
 		String exdName = fullPath;
 		exdName = fullPath.replace(".exh", "");
-		exdName += "_%s%s.exd"; // name_0_en.exd		
+		exdName += "_%s%s.exd"; // name_0_en.exd				
 		
 		String folderName = fullPath.substring(0, fullPath.lastIndexOf("/"));
 		int folderHash = HashDatabase.computeCRC(folderName.getBytes(), 0, folderName.getBytes().length);
@@ -322,7 +323,7 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 				else
 					formattedExdName = String.format(exdName, exhFile.getPageTable()[i].pageNum, "");
 				
-				formattedExdName = formattedExdName.substring(formattedExdName.lastIndexOf("/")+1);
+				//formattedExdName = formattedExdName.substring(formattedExdName.lastIndexOf("/")+1);
 				
 				int fileHash = HashDatabase.computeCRC(formattedExdName.getBytes(), 0, formattedExdName.getBytes().length);
 				
@@ -337,10 +338,43 @@ public class EXDF_View extends JScrollPane implements ItemListener{
 							//Hey we accidently found something
 							if (HashDatabase.getFileName(fileHash) == null){
 								System.out.println("Adding: " + formattedExdName);
-								if (numLanguages > 1)					
-									HashDatabase.addPathToDB(String.format(exdName, exhFile.getPageTable()[i].pageNum, "_"+langs[j]), currentIndex.getIndexName());
-								else
-									HashDatabase.addPathToDB(String.format(exdName, exhFile.getPageTable()[i].pageNum, ""), currentIndex.getIndexName());
+								
+								java.sql.Connection conn = HashDatabase.getConnection("./fullpath.db");
+								if (conn != null){
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Null.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_System_Title.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_EndCredit01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_Safe1.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Town_Ish01_Day.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Town_Ish02_Day.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_IshSebu01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_IshSebu02.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_IshSebu_01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_IshSebu01.scd	", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_Abaracia02.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_DravaniaH_01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_IshSebu01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_DravaniaL02.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_DravaniaL_01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_DravaniaC02.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_DravaniaC_01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Field_Abaracia02.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_Abaracia_01.scd", "0c0000", conn);
+									HashDatabase.addToFullPathDB("music/ex1/BGM_EX1_Battle_MagicC_01.scd", "0c0000", conn);
+									
+									
+									if (numLanguages > 1)													
+										HashDatabase.addToFullPathDB(formattedExdName, "040000", conn);								
+									else
+										HashDatabase.addToFullPathDB(String.format(exdName, exhFile.getPageTable()[i].pageNum, ""), "040000", conn);
+									try {
+										conn.close();
+									} catch (SQLException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+								}
+								
 							}
 							byte[] data = currentIndex.extractFile(currentIndex.getPackFolders()[folderIndex].getFiles()[j2].getOffset(), null);
 							exdFile[(i*(numLanguages == 1 ? 1 : 4))+j] = new EXDF_File(data);
