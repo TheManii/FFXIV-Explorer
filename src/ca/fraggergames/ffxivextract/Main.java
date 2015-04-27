@@ -58,6 +58,9 @@ public class Main {
 		
 		HavokNative.setAnimation(1);
 		
+		HavokNative.endHavok();
+*/
+		/*
 		ByteBuffer buffer = ByteBuffer.allocateDirect(4 * 16 * HavokNative.getNumBones());
 		buffer.order(ByteOrder.nativeOrder());
 		

@@ -18,7 +18,7 @@ attribute vec4 aBlendWeight;
 attribute vec4 aBlendIndex;
 
 varying vec4 vPosition;
-varying vec4 vNormal;
+varying vec4 vNormal;	
 varying vec4 vTexCoord;
 varying vec4 vColor;
 
@@ -33,20 +33,15 @@ void main(void) {
 
 	vec4 curIndex = aBlendIndex;
     vec4 curWeight = aBlendWeight;
-	vec4 pos = aPosition;
-	//pos.z *= -1;
-	//int fakeMatrix[10] = int[](0, 1, 2, 3, 4, 5 , 6, 7, 8,9);	
-	//int fakeMatrix[10] = int[](1, 1, 1, 1, 1, 1 , 1, 1,1, 1);
+	vec4 pos = aPosition;	
 
     for (int i = 0; i < 4; i++)
-    {
-    	
-        mat4 m44;
+    {    	
         
-        m44 = uBones[4];      
+        mat4 m44 = uBones[int(curIndex.x)];      
         
         // transform the offset by bone i
-        transformedPosition += m44 * pos;
+        transformedPosition += (m44 * aPosition) * curWeight.x;
 
         mat3 m33 = mat3(m44[0].xyz,
                         m44[1].xyz,
@@ -55,9 +50,6 @@ void main(void) {
         // transform normal by bone i
         transformedNormal += m33 * aNormal.xyz * curWeight.x;
 
-        // shift over the index/weight variables, this moves the index and 
-        // weight for the current bone into the .x component of the index 
-        // and weight variables
         curIndex = curIndex.yzwx;
         curWeight = curWeight.yzwx;
     }

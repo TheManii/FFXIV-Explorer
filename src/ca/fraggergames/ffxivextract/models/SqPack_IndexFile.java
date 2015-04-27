@@ -31,7 +31,7 @@ public class SqPack_IndexFile {
 		getSegments(ref, sqpackHeaderLength);
 
 		// Check if we have a folder segment, if not... load files only
-		if (segments[3] != null) {			
+		if (segments[3] != null && offset != 0) {			
 			int offset = segments[3].getOffset();
 			int size = segments[3].getSize();
 			int numFolders = size / 0x10;
@@ -62,7 +62,7 @@ public class SqPack_IndexFile {
 		} else {
 			noFolder = true;
 			packFolders = new SqPack_Folder[1];
-			packFolders[0] = new SqPack_Folder(0, segments[0].getSize()/0x10, segments[0].getOffset());
+			packFolders[0] = new SqPack_Folder(0, 2 * (segments[0].getSize()/0x10), segments[0].getOffset());
 			packFolders[0].readFiles(ref);
 		}
 
@@ -261,11 +261,11 @@ public class SqPack_IndexFile {
 			for (int i = 0; i < files.length; i++)
 			{			
 				int id = ref.readInt();
-				int id2 = ref.readInt();
+				//int id2 = ref.readInt();
 				long dataoffset = ref.readInt();
-				ref.readInt();
+				//ref.readInt();
 			
-				files[i] = new SqPack_File(id, id2, dataoffset);
+				files[i] = new SqPack_File(id, 0, dataoffset);
 								
 			}
 		}
@@ -338,7 +338,7 @@ public class SqPack_IndexFile {
 		//Get the correct data number
 		int datNum = (int) ((dataoffset & 0x000F) / 2);
 		dataoffset -= dataoffset & 0x000F;		
-		pathToOpen = pathToOpen.replace("index", "dat" + datNum);
+		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
 		
 		SqPack_DatFile datFile = new SqPack_DatFile(pathToOpen);
 		int contentType = datFile.getContentType(dataoffset * 0x8);
@@ -353,7 +353,7 @@ public class SqPack_IndexFile {
 		//Get the correct data number
 		int datNum = (int) ((dataoffset & 0x000F) / 2);
 		dataoffset -= dataoffset & 0x000F;		
-		pathToOpen = pathToOpen.replace("index", "dat" + datNum);
+		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
 		
 		SqPack_DatFile datFile = new SqPack_DatFile(pathToOpen);
 		byte[] data = datFile.extractFile(dataoffset * 0x8, loadingDialog);
