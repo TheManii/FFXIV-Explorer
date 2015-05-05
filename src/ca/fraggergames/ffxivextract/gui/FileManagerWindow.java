@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
@@ -44,6 +45,8 @@ import javax.swing.SwingWorker;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
+
+import com.mysql.jdbc.Connection;
 
 import ca.fraggergames.ffxivextract.Constants;
 import ca.fraggergames.ffxivextract.Strings;
@@ -283,7 +286,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 					
 					@Override
 					public boolean accept(File f) {
-						return true;//f.getName().endsWith(".index") || f.isDirectory();
+						return f.getName().contains(".index") || f.isDirectory();
 					}				
 				};
 				fileChooser.addChoosableFileFilter(filter);
@@ -512,6 +515,17 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 	
 	private void openData(SqPack_File file) {
 		
+		//Delete this after, but add file to fullpath
+	/*	java.sql.Connection conn = HashDatabase.getConnection("./fullpath.db");
+		if (conn != null){
+			HashDatabase.addToFullPathDB(HashDatabase.getFolder(file.getId2()) + "/" + file.getName(), "0a0000", conn);
+			try {
+				conn.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}*/
 		JTabbedPane tabs = new JTabbedPane();
 				
 		byte data[] = null;		

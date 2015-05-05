@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -34,7 +35,7 @@ public class SqPack_IndexFile {
 		getSegments(ref, sqpackHeaderLength);
 
 		// Check if we have a folder segment, if not... load files only
-		if (segments[3] != null && offset != 0) {			
+		if (segments[3] != null && segments[3].offset != 0) {			
 			int offset = segments[3].getOffset();
 			int size = segments[3].getSize();
 			int numFolders = size / 0x10;
@@ -60,13 +61,13 @@ public class SqPack_IndexFile {
 				packFolders[i] = new SqPack_Folder(id, numFiles,
 						fileIndexOffset);
 
-				packFolders[i].readFiles(ref, prgLoadingBar, lblLoadingBarString);				
+				packFolders[i].readFiles(ref, prgLoadingBar, lblLoadingBarString, false);				
 			}
 		} else {
 			noFolder = true;
 			packFolders = new SqPack_Folder[1];
-			packFolders[0] = new SqPack_Folder(0, 2 * (segments[0].getSize()/0x10), segments[0].getOffset());
-			packFolders[0].readFiles(ref);
+			packFolders[0] = new SqPack_Folder(0, (pathToIndex.contains("index2") ? 2 : 1 ) * segments[0].getSize()/0x10, segments[0].getOffset());
+			packFolders[0].readFiles(ref, pathToIndex.contains("index2"));
 		}
 
 		ref.close();
@@ -103,13 +104,13 @@ public class SqPack_IndexFile {
 				packFolders[i] = new SqPack_Folder(id, numFiles,
 						fileIndexOffset);
 
-				packFolders[i].readFiles(ref);
+				packFolders[i].readFiles(ref, false);
 			}
 		} else {
 			noFolder = true;
 			packFolders = new SqPack_Folder[1];
-			packFolders[0] = new SqPack_Folder(0, segments[0].getSize()/0x10, segments[0].getOffset());
-			packFolders[0].readFiles(ref);
+			packFolders[0] = new SqPack_Folder(0, (pathToIndex.contains("index2") ? 2 : 1 ) * segments[0].getSize()/0x10, segments[0].getOffset());
+			packFolders[0].readFiles(ref, pathToIndex.contains("index2"));
 		}
 
 		ref.close();
@@ -238,38 +239,61 @@ public class SqPack_IndexFile {
 				//HashDatabase.flagFolderNameAsUsed(id);
 		}
 		
-		protected void readFiles(LERandomAccessFile ref, JProgressBar prgLoadingBar, JLabel lblLoadingBarString) throws IOException{
+		protected void readFiles(LERandomAccessFile ref, JProgressBar prgLoadingBar, JLabel lblLoadingBarString, boolean isIndex2) throws IOException{
 			ref.seek(fileIndexOffset);
 			
 			for (int i = 0; i < files.length; i++)
 			{			
-				int id = ref.readInt();
-				int id2 = ref.readInt();
-				long dataoffset = ref.readInt();
-				ref.readInt();
-			
-				files[i] = new SqPack_File(id, id2, dataoffset);
-			
-				if (prgLoadingBar != null)
-					prgLoadingBar.setValue(prgLoadingBar.getValue()+1);
+				if (!isIndex2){
+					int id = ref.readInt();
+					int id2 = ref.readInt();
+					long dataoffset = ref.readInt();
+					ref.readInt();
 				
-				if (lblLoadingBarString != null)
-					lblLoadingBarString.setText((int)(prgLoadingBar.getPercentComplete() * 100) + "%");
+					files[i] = new SqPack_File(id, id2, dataoffset);
+				
+					if (prgLoadingBar != null)
+						prgLoadingBar.setValue(prgLoadingBar.getValue()+1);
+					
+					if (lblLoadingBarString != null)
+						lblLoadingBarString.setText((int)(prgLoadingBar.getPercentComplete() * 100) + "%");
+				}
+				else
+				{
+					int id = ref.readInt();
+					long dataoffset = ref.readInt();
+					files[i] = new SqPack_File(id, -1, dataoffset);
+					
+					if (prgLoadingBar != null)
+						prgLoadingBar.setValue(prgLoadingBar.getValue()+1);
+					
+					if (lblLoadingBarString != null)
+						lblLoadingBarString.setText((int)(prgLoadingBar.getPercentComplete() * 100) + "%");
+					
+				}
 			}
 		}
 		
-		protected void readFiles(LERandomAccessFile ref) throws IOException{
+		protected void readFiles(LERandomAccessFile ref, boolean isIndex2) throws IOException{
 			ref.seek(fileIndexOffset);
 			
 			for (int i = 0; i < files.length; i++)
 			{			
-				int id = ref.readInt();
-				//int id2 = ref.readInt();
-				long dataoffset = ref.readInt();
-				//ref.readInt();
-			
-				files[i] = new SqPack_File(id, 0, dataoffset);
-								
+				if (!isIndex2)
+				{
+					int id = ref.readInt();
+					int id2 = ref.readInt();
+					long dataoffset = ref.readInt();
+					ref.readInt();
+				
+					files[i] = new SqPack_File(id, id2, dataoffset);
+				}
+				else
+				{
+					int id = ref.readInt();
+					long dataoffset = ref.readInt();
+					files[i] = new SqPack_File(id, -1, dataoffset);										
+				}					
 			}
 		}
 		
@@ -304,7 +328,12 @@ public class SqPack_IndexFile {
 			this.id = id;
 			this.id2 = id2;
 			this.dataoffset = offset;
-			this.name = HashDatabase.getFileName(id);
+			
+			//For Index2
+			//if (id2 == -1)			
+				//this.name = HashDatabase.getFullpath(id);			
+			//else
+				this.name = HashDatabase.getFileName(id);
 			if (this.name == null)
 				this.name = String.format("~%x", id);
 			//else
@@ -356,6 +385,7 @@ public class SqPack_IndexFile {
 		
 		//Get the correct data number
 		int datNum = (int) ((dataoffset & 0x000F) / 2);
+
 		dataoffset -= dataoffset & 0x000F;		
 		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
 		pathToOpen = pathToOpen.replace("index", "dat" + datNum);

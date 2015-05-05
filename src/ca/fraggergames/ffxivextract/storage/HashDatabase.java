@@ -255,7 +255,7 @@ public class HashDatabase {
 		}
 
 	}
-
+	
 	public static int getHashDBVersion()
 	{
 		String version = "-1";
@@ -544,6 +544,27 @@ public class HashDatabase {
 			}				
 	}
 	
+	public static void beginConnection(String path) {		
+		try {
+			globalConnection = DriverManager
+					.getConnection("jdbc:sqlite:"+path);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}				
+	}
+	
+	public static Connection getConnection(String path) {		
+		try {
+			Connection conn = DriverManager
+					.getConnection("jdbc:sqlite:"+path);
+			return conn;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
 	public static void closeConnection() {		
 		try {
 			globalConnection.close();
@@ -627,6 +648,61 @@ public class HashDatabase {
 			}
 		}		
 		
+		return path;
+	}
+	
+	public static boolean addToFullPathDB(String fullPath, String archive, Connection conn)
+	{
+		
+		int fullPathHash = computeCRC(fullPath.getBytes(), 0,
+				fullPath.getBytes().length);		
+				
+		//if (Constants.DEBUG)
+			System.out.println("Adding Entry: " + fullPath);
+
+		try{		
+			Statement statement = conn.createStatement();
+			statement.setQueryTimeout(30); // set timeout to 30 sec.
+			statement.executeUpdate(String.format("insert or ignore into fullPaths values(%d, '%s', 0, '%s', '%s')", fullPathHash, fullPath, archive, Constants.DB_VERSION_CODE));
+			statement.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public static String getFullpath(long hash)
+	{
+		Connection connection = null;
+		String path = null;
+		try{
+				connection = DriverManager
+						.getConnection("jdbc:sqlite:./fullpath.db");
+			
+			Statement statement = connection.createStatement();
+			//statement.executeUpdate("UPDATE `folders` SET `used`= 1 WHERE hash="+hash+";");
+			ResultSet rs = statement
+					.executeQuery("select * from fullPaths where hash = " + hash);
+						
+			while (rs.next())
+				path = rs.getString("path");
+			
+			
+			connection.clearWarnings();
+			statement.close();
+			rs.close();
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+			return null;
+		} finally {
+			try {
+				if (globalConnection == null && connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				System.err.println(e);
+			}
+		}		
 		return path;
 	}
 

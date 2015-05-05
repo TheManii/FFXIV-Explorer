@@ -1,12 +1,8 @@
 package ca.fraggergames.ffxivextract;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.prefs.Preferences;
 
 import javax.swing.JOptionPane;
@@ -14,12 +10,10 @@ import javax.swing.UIManager;
 
 import ca.fraggergames.ffxivextract.gui.FileManagerWindow;
 import ca.fraggergames.ffxivextract.gui.components.Update_Dialog;
-import ca.fraggergames.ffxivextract.helpers.HavokNative;
-import ca.fraggergames.ffxivextract.helpers.LERandomAccessFile;
+import ca.fraggergames.ffxivextract.helpers.DatBuilder;
 import ca.fraggergames.ffxivextract.helpers.PathSearcher;
 import ca.fraggergames.ffxivextract.helpers.VersionUpdater;
 import ca.fraggergames.ffxivextract.helpers.VersionUpdater.VersionCheckObject;
-import ca.fraggergames.ffxivextract.models.SqPack_IndexFile.SqPack_Folder;
 import ca.fraggergames.ffxivextract.storage.HashDatabase;
 
 public class Main {
@@ -32,7 +26,19 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+/*
+		try {
+			DatBuilder builder = new DatBuilder(1, "C:\\Users\\Filip\\Downloads\\ffxiv-heavensward-bench\\game\\sqpack\\ffxiv\\0c0000.win32.dat1");
+			builder.addFile("C:\\Users\\Filip\\Desktop\\Blah\\0\\~4ac60b91");
+			builder.finish();
+		} catch (FileNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.exit(1);//*/
 		// Init the hash database
 		try {
 			File dbFile = new File("./" + Constants.DBFILE_NAME);
