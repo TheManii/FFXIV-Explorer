@@ -2,6 +2,8 @@ package ca.fraggergames.ffxivextract.models;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -17,7 +19,7 @@ public class SqPack_IndexFile {
 	private SqPack_DataSegment segments[] = new SqPack_DataSegment[4];
 	private SqPack_Folder packFolders[];
 	private boolean noFolder = false;
-
+	
 	long offset;
 	int size;
 
@@ -27,7 +29,8 @@ public class SqPack_IndexFile {
 		
 		LERandomAccessFile ref = new LERandomAccessFile(pathToIndex, "r");
 
-		int sqpackHeaderLength = checkSqPackHeader(ref);	
+		int sqpackHeaderLength = checkSqPackHeader(ref);			
+		
 		getSegments(ref, sqpackHeaderLength);
 
 		// Check if we have a folder segment, if not... load files only
@@ -339,6 +342,7 @@ public class SqPack_IndexFile {
 		int datNum = (int) ((dataoffset & 0x000F) / 2);
 		dataoffset -= dataoffset & 0x000F;		
 		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
+		pathToOpen = pathToOpen.replace("index", "dat" + datNum);
 		
 		SqPack_DatFile datFile = new SqPack_DatFile(pathToOpen);
 		int contentType = datFile.getContentType(dataoffset * 0x8);
@@ -354,6 +358,7 @@ public class SqPack_IndexFile {
 		int datNum = (int) ((dataoffset & 0x000F) / 2);
 		dataoffset -= dataoffset & 0x000F;		
 		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
+		pathToOpen = pathToOpen.replace("index", "dat" + datNum);
 		
 		SqPack_DatFile datFile = new SqPack_DatFile(pathToOpen);
 		byte[] data = datFile.extractFile(dataoffset * 0x8, loadingDialog);
@@ -366,6 +371,18 @@ public class SqPack_IndexFile {
 		return null;
 	}
 
-
+	public Calendar getDatTimestmap(int datNum) throws IOException
+	{
+		String pathToOpen = path;
+		
+		//Get the correct data number		
+		pathToOpen = pathToOpen.replace("index2", "dat" + datNum);
+		pathToOpen = pathToOpen.replace("index", "dat" + datNum);
+		
+		SqPack_DatFile datFile = new SqPack_DatFile(pathToOpen);
+		Calendar timestamp = datFile.getTimeStamp();
+		datFile.close();
+		return timestamp;
+	}
 	
 }
