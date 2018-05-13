@@ -27,12 +27,12 @@ Requirements
 ## Game requirements:  
 ### Platform and Languages:  
 
-| Platform Name                    | Status    | \| | Language Name           | Status    |  
-|----------------------------------|----------:|----|-------------------------|----------:|  
-| Windows x86/x64 Client Steam     | Supported | \| | Worldwide (JP/EN/FR/DE) | Supported |  
-| Windows x86/x64 Client Non-Steam | Supported | \| | China (CN)              | Supported |  
-| MacOS x86 Client Non-Steam       | Supported | \| | Korea (KR)              | Supported |  
-| PlayStation 4                    | Supported |  
+| Platform Name                    | Status        | \| | Language Name           | Status    |  
+|----------------------------------|--------------:|----|-------------------------|----------:|  
+| Windows x86/x64 Client Steam     |     Supported | \| | Worldwide (JP/EN/FR/DE) | Supported |  
+| Windows x86/x64 Client Non-Steam |     Supported | \| | China (CN)              | Supported |  
+| MacOS x86 Client Non-Steam       |     Supported | \| | Korea (KR)              | Supported |  
+| PlayStation 4                    | Not supported |  
 
 ### Versions:  
 
