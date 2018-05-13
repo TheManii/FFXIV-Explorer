@@ -399,6 +399,12 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 				swapper.setLocationRelativeTo(FileManagerWindow.this);
 				swapper.setVisible(true);
 			}
+			else if (event.getActionCommand().equals("fileinject"))
+            {
+				FileInjectorWindow injector = new FileInjectorWindow();
+				injector.setLocationRelativeTo(FileManagerWindow.this);
+				injector.setVisible(true);
+            }
 			else if (event.getActionCommand().equals("macroeditor"))
 			{
 				MacroEditorWindow macroEditor = new MacroEditorWindow();
@@ -546,6 +552,10 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		tools_musicswapper.setActionCommand("musicswapper");
 		tools_musicswapper.addActionListener(menuHandler);
 		
+		JMenuItem tools_fileinject = new JMenuItem(Strings.MENUITEM_FILEINJECT);
+		tools_fileinject.setActionCommand("fileinject");
+		tools_fileinject.addActionListener(menuHandler);
+		
 		JMenuItem tools_hashcalculator = new JMenuItem(Strings.MENUITEM_HASHCALC);
 		tools_hashcalculator.setActionCommand("hashcalc");
 		tools_hashcalculator.addActionListener(menuHandler);
@@ -599,6 +609,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		dataviewers.add(dataviewer_outfitter);
 		
 		tools.add(tools_musicswapper);
+		tools.add(tools_fileinject);
 		tools.add(tools_macroEditor);
 		tools.add(tools_logViewer);
 		tools.add(tools_hashcalculator);
