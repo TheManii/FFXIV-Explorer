@@ -65,9 +65,11 @@ Building from source
         * Make sure that there are no spaces in the path to it
     * Install a suitable JDK and confirm that the `JAVA_HOME` environmental variable is set to point to it
     * For Maven:
+        * Make sure Maven is set in your `PATH` environmental variable
         * Run `mvn -f <path to source code>\pom.xml package`
         * Output is in `<path to source code>\target`
     * For VS Code:
+        * Make sure Maven is set in your `PATH` environmental variable
         * Open the folder
         * Go to `Tasks` → `Run Build Task`
         * Output is in `<path to source code>\target`
