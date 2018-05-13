@@ -37,7 +37,7 @@ The language codes are:
 0x2 - en (English)
 0x3 - de (German)
 0x4 - fr (French)
-0x5 - chs (Chinese - Singapore)
+0x5 - chs (Chinese - Simplified)
 0x6 - cht (Chinese - Traditional)
 0x7 - ko (Korean)
 

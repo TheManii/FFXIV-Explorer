@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class EXHF_File {	
 
 	public final static String languageCodes[] = {"", "_ja", "_en", "_de", "_fr", "_chs", "_cht", "_ko"};
-	public final static String languageNames[] = {"", "Japanese", "English", "German", "French", "Chinese - Singapore", "Chinese - Traditional", "Korean"};
+	public final static String languageNames[] = {"", "Japanese", "English", "German", "French", "Chinese", "Chinese - Traditional", "Korean"};
 	
 	private EXDF_Dataset datasetTable[];
 	private EXDF_Page pageTable[];
