@@ -85,6 +85,10 @@
                                 <sourceFile>monsters.lst</sourceFile>
                                 <destinationFile>target/monsters.lst</destinationFile>
                             </fileSet>
+                            <fileSet>
+                                <sourceFile>luadec.dll</sourceFile>
+                                <destinationFile>target/luadec.dll</destinationFile>
+                            </fileSet>
                         </fileSets>
                         </configuration>
                     </execution>
@@ -97,19 +101,18 @@
                 <executions>
                     <execution>
                         <id>copy-resources</id>
-                        <!-- here the phase you need -->
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                        <outputDirectory>target/tablenames</outputDirectory>
-                        <resources>          
-                        <resource>
-                        <directory>tablenames</directory>
-                        <filtering>true</filtering>
-                        </resource>
-                        </resources>
+                            <outputDirectory>target/tablenames</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>tablenames</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
