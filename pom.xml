@@ -63,6 +63,57 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.coderplus.maven.plugins</groupId>
+                <artifactId>copy-rename-maven-plugin</artifactId>
+                <version>1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                        <fileSets>
+                            <fileSet>
+                                <sourceFile>hashlist.db</sourceFile>
+                                <destinationFile>target/hashlist.db</destinationFile>
+                            </fileSet>
+                            <fileSet>
+                                <sourceFile>monsters.lst</sourceFile>
+                                <destinationFile>target/monsters.lst</destinationFile>
+                            </fileSet>
+                        </fileSets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                        <outputDirectory>target/tablenames</outputDirectory>
+                        <resources>          
+                        <resource>
+                        <directory>tablenames</directory>
+                        <filtering>true</filtering>
+                        </resource>
+                        </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

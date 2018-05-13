@@ -16,7 +16,8 @@
             "label": "clean",
             "type": "shell",
             "command": "${config:maven.executable.path} -f \"${workspaceFolder}/pom.xml\" clean",
-            "group": "none"
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
