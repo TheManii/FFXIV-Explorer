@@ -762,7 +762,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			try {
 				if (exhfComponent == null || !exhfComponent.isSame(file.getName()))				
 					exhfComponent = new EXDF_View(currentIndexFile, HashDatabase.getFolder(file.getId2()) + "/" + file.getName(), new EXHF_File(data));				
-				tabs.addTab("EXDF File", exhfComponent);			
+				tabs.addTab("EXHF File", exhfComponent);			
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -773,7 +773,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			try {
 				if (exhfComponent == null || !exhfComponent.isSame(file.getName()))				
 					exhfComponent = new EXDF_View(currentIndexFile, HashDatabase.getFolder(file.getId2()) + "/" + file.getName(), new EXDF_File(data));
-				tabs.addTab("EXHF File", exhfComponent);
+				tabs.addTab("EXDF File", exhfComponent);
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
