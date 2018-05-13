@@ -12,7 +12,7 @@ public class Constants {
 	public static final int APP_VERSION_CODE = 10;
 	public static final int DB_VERSION_CODE = 10;	
 	
-	public static final String COMMIT = "913b18bb8db4b835d71ddcef3403775f0b4c456f";
+	public static final String COMMIT = "02838a16db79f093303ca8bfe3d1e16e74b701c2";
 	public static boolean HAVOK_ENABLED = false;
 	public static boolean DEBUG = false;
 	public static boolean EASTER_EGG = false;
