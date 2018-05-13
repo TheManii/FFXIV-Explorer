@@ -31,7 +31,7 @@ Requirements
 |----------------------------------|----------:|----|-------------------------|----------:|  
 | Windows x86/x64 Client Steam     | Supported | \| | Worldwide (JP/EN/FR/DE) | Supported |  
 | Windows x86/x64 Client Non-Steam | Supported | \| | China (CN)              | Supported |  
-| MacOS x86 Client Non-Steam       |  Untested | \| | Korea (KR)              | Supported |  
+| MacOS x86 Client Non-Steam       | Supported | \| | Korea (KR)              | Supported |  
 | PlayStation 4                    | Supported |  
 
 ### Versions:  
