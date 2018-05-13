@@ -22,3 +22,9 @@ execonfig.xml
 *.cmp
 
 !/luadec.dll
+
+Thumbs.db
+
+# Ignore artifacts
+out/
+target/
