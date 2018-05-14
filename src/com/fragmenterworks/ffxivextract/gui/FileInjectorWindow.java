@@ -5,6 +5,7 @@ import com.fragmenterworks.ffxivextract.helpers.DatBuilder;
 import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_File;
+import com.fragmenterworks.ffxivextract.Constants;
 import com.google.gson.Gson;
 
 import javax.swing.*;
@@ -17,12 +18,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.io.File;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Hashtable;
+import java.util.prefs.Preferences;
 
 public class FileInjectorWindow extends JFrame {
 
@@ -33,6 +36,11 @@ public class FileInjectorWindow extends JFrame {
 	private SqPack_IndexFile editMusicFile, originalMusicFile;
 	private SqPack_File[] editedFiles;
 	private Hashtable<Integer, Integer> originalPositionTable = new Hashtable<Integer, Integer>(); //Fucking hack, but this is my fix if we want alphabetical sort
+
+	Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
+	File lastOpenedIndexFile = null;
+	SqPack_IndexFile currentIndexFile;
+
 
 	//CUSTOM MUSIC STUFF
 	private int currentDatIndex;
@@ -70,6 +78,9 @@ public class FileInjectorWindow extends JFrame {
 		URL imageURL = getClass().getResource("/res/frameicon.png");
 		ImageIcon image = new ImageIcon(imageURL);
 		this.setIconImage(image.getImage());
+
+		if (prefs.get(Constants.PREF_LASTOPENED, null) != null)
+		lastOpenedIndexFile = new File(prefs.get(Constants.PREF_LASTOPENED, null));
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -206,7 +217,9 @@ public class FileInjectorWindow extends JFrame {
 				
 				if (event.getValueIsAdjusting() ||lstSet.getModel().getSize() == 0)
 					return;				
-				txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0xFFFFFFFF));
+				txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET2, (editedFiles[lstOriginal.getSelectedIndex()].getOffset() * 8) - ((editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0x0f) /2)));
+
+				
 				if (editedFiles[lstOriginal.getSelectedIndex()].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[lstOriginal.getSelectedIndex()].dataoffset)
 					txtSetTo.setForeground(Color.RED);
 				else
@@ -436,7 +449,8 @@ public class FileInjectorWindow extends JFrame {
 	}
 
 	public void setPath() {
-		JFileChooser fileChooser = new JFileChooser("D:\\Steam\\SteamApps\\common\\FINAL FANTASY XIV - A Realm Reborn\\game\\sqpack\\ffxiv");
+		//JFileChooser fileChooser = new JFileChooser("D:\\Steam\\SteamApps\\common\\FINAL FANTASY XIV - A Realm Reborn\\game\\sqpack\\ffxiv");
+		JFileChooser fileChooser = new JFileChooser(lastOpenedIndexFile);
 
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -458,6 +472,15 @@ public class FileInjectorWindow extends JFrame {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 
 		int retunval = fileChooser.showOpenDialog(FileInjectorWindow.this);
+
+		if (retunval == JFileChooser.APPROVE_OPTION)
+		{
+			lastOpenedIndexFile = fileChooser.getSelectedFile();
+			//openFile(fileChooser.getSelectedFile());
+			
+			Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
+			prefs.put(Constants.PREF_LASTOPENED, lastOpenedIndexFile.getAbsolutePath());					
+		}
 
 		if (retunval == JFileChooser.APPROVE_OPTION) {
 			try {
@@ -563,7 +586,8 @@ public class FileInjectorWindow extends JFrame {
 		loadCustomDatIndexList();
 		
 		//Init this since the list listener doesn't fire
-		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0xFFFFFFFF));
+		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET2, (editedFiles[lstOriginal.getSelectedIndex()].getOffset() * 8) - ((editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0x0f) /2)));
+		
 		if (editedFiles[lstOriginal.getSelectedIndex()].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[lstOriginal.getSelectedIndex()].dataoffset)
 			txtSetTo.setForeground(Color.RED);
 		else
@@ -579,9 +603,9 @@ public class FileInjectorWindow extends JFrame {
 			String fileName = files[i].getName2();
 			
 			if (fileName !=null)
-				listModel.addElement(String.format("%s (%08X)", fileName, files[i].getOffset() & 0xFFFFFFFF));
+				listModel.addElement(String.format("%s (0x%08X)", fileName, (files[i].getOffset() * 8) - ((files[i].getOffset() & 0x0f) / 2)));
 			else
-				listModel.addElement(String.format("%08X (%08X)", files[i].id & 0xFFFFFFFF, files[i].getOffset() & 0xFFFFFFFF));
+				listModel.addElement(String.format("%08X (0x%08X)", files[i].id & 0xFFFFFFFF, (files[i].getOffset() * 8) - ((files[i].getOffset() & 0x0f) / 2)));
 		}
 			
 		list.setSelectedIndex(0);
@@ -623,7 +647,7 @@ public class FileInjectorWindow extends JFrame {
 		setSwapperEnabled(true);
 			
 		//Init this since the list listener doesn't fire		
-		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[0].getOffset() & 0xFFFFFFFF));
+		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET2, (editedFiles[0].getOffset() * 8) - ((editedFiles[0].getOffset() & 0x0f) /2)));
 		if (editedFiles[0].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[0].dataoffset)
 			txtSetTo.setForeground(Color.RED);
 		else
@@ -784,7 +808,7 @@ public class FileInjectorWindow extends JFrame {
 						
 			ref.close();
 			
-			txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, tooffset & 0xFFFFFFFF));
+			txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET2, ((tooffset * 8) - ((tooffset & 0x0f) / 2))));
 			if (toBeChanged.getOffset() != tooffset)
 				txtSetTo.setForeground(Color.RED);
 			else

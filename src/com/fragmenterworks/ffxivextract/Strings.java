@@ -29,6 +29,7 @@ public class Strings {
 	public static final String MUSICSWAPPER_TOID = "Set to:";
 	public static final String MUSICSWAPPER_ORIGINALID = "Original Id:";
 	public static final String MUSICSWAPPER_CURRENTOFFSET = "Currently set to offset: %08X";
+	public static final String MUSICSWAPPER_CURRENTOFFSET2 = "Currently set to offset: 0x%08X";
 	public static final String MUSICSWAPPER_CURRENTSETTO = "Currently set to: ";
 
 	//File Inject
