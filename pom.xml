@@ -25,6 +25,7 @@
                     <exclude>META-INF/**</exclude>
                     <exclude>ca/**</exclude>
                     <exclude>com/**</exclude>
+                    <exclude>res/Thumbs.db</exclude>
                 </excludes>
             </resource>
         </resources>
@@ -129,7 +130,32 @@
 
         <dependency>
             <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
             <artifactId>jogl-all-main</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-main</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>nativewindow</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>nativewindow-main</artifactId>
             <version>2.3.2</version>
         </dependency>
 
@@ -142,6 +168,12 @@
         <dependency>
             <groupId>org.jogamp.gluegen</groupId>
             <artifactId>gluegen-rt</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt-main</artifactId>
             <version>2.3.2</version>
         </dependency>
 
