@@ -16,6 +16,7 @@ bin/
 .cproject
 .settings/org.eclipse.cdt.codan.core.prefs
 .settings/org.eclipse.cdt.managedbuilder.core.prefs
+.settings/org.eclipse.core.resources.prefs
 *.o
 *.jar
 execonfig.xml
