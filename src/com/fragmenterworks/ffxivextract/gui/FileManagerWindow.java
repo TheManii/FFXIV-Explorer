@@ -116,6 +116,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 	
 	//MENU
 	JMenuItem file_Extract;
+	JMenuItem file_ExtractConvert;
 	JMenuItem file_ExtractRaw;
 	JMenuItem file_Close;
 	JMenuItem search_search;
@@ -147,8 +148,8 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		JPanel pnlContent = new JPanel();
 		
 		pnlContent.registerKeyboardAction(menuHandler, "search", KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		pnlContent.registerKeyboardAction(menuHandler, "extractc", KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		pnlContent.registerKeyboardAction(menuHandler, "extractr", KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.SHIFT_MASK|KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		pnlContent.registerKeyboardAction(menuHandler, "extractu", KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		pnlContent.registerKeyboardAction(menuHandler, "extractc", KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.SHIFT_MASK|KeyEvent.CTRL_MASK), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		pnlContent.registerKeyboardAction(menuHandler, "searchagain", KeyStroke.getKeyStroke(KeyEvent.VK_F3,0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 		
 		getContentPane().add(pnlContent, BorderLayout.CENTER);
@@ -337,13 +338,17 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			{
 				closeFile();				
 			}
-			else if (event.getActionCommand().equals("extractc")&& file_Extract.isEnabled())
+			else if (event.getActionCommand().equals("extractu") && file_Extract.isEnabled())
+			{
+				extract(false);
+			}
+			else if (event.getActionCommand().equals("extractc")&& file_ExtractConvert.isEnabled())
 			{
 				extract(true);
 			}
-			else if (event.getActionCommand().equals("extractr") && file_ExtractRaw.isEnabled())
+			else if (event.getActionCommand().equals("extractr")&& file_ExtractRaw.isEnabled())
 			{
-				extract(false);
+				//extractRaw();
 			}
 			else if (event.getActionCommand().equals("search") && search_search.isEnabled())
 			{				
@@ -514,17 +519,22 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		file_Close.setActionCommand("close");
 		file_Extract = new JMenuItem(Strings.MENUITEM_EXTRACT);
 		file_Extract.setEnabled(false);
-		file_Extract.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_MASK));
+		file_Extract.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
+		file_Extract.setActionCommand("extractu");
+		file_ExtractConvert = new JMenuItem(Strings.MENUITEM_EXTRACTCONVERT);
+		file_ExtractConvert.setEnabled(false);
+		file_ExtractConvert.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.SHIFT_MASK|KeyEvent.CTRL_MASK));
+		file_ExtractConvert.setActionCommand("extractc");
 		file_ExtractRaw = new JMenuItem(Strings.MENUITEM_EXTRACTRAW);
 		file_ExtractRaw.setEnabled(false);
-		file_ExtractRaw.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.SHIFT_MASK|KeyEvent.CTRL_MASK));
-		file_Extract.setActionCommand("extractc");
+		//file_ExtractConvert.setAccelerator();
 		file_ExtractRaw.setActionCommand("extractr");
 		JMenuItem file_Quit = new JMenuItem(Strings.MENUITEM_QUIT);
 		file_Quit.setActionCommand("quit");
 		file_Open.addActionListener(menuHandler);
 		file_Close.addActionListener(menuHandler);
 		file_Extract.addActionListener(menuHandler);
+		file_ExtractConvert.addActionListener(menuHandler);
 		file_ExtractRaw.addActionListener(menuHandler);
 		file_Quit.addActionListener(menuHandler);
 		
@@ -598,6 +608,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		file.add(file_Close);
 		file.addSeparator();
 		file.add(file_Extract);
+		file.add(file_ExtractConvert);
 		file.add(file_ExtractRaw);
 		file.addSeparator();
 		file.add(file_Quit);	
@@ -644,20 +655,23 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			lblHashValue.setText("*");			
 			lblContentTypeValue.setText("*");
 			file_Extract.setEnabled(true);
-			file_ExtractRaw.setEnabled(true);	
+			file_ExtractConvert.setEnabled(true);
+			//file_ExtractRaw.setEnabled(true);
 			return;
 		}
 		
 		if (fileTree.getSelectedFiles().size() == 0)
 		{
 			file_Extract.setEnabled(false);
-			file_ExtractRaw.setEnabled(false);			
+			file_ExtractConvert.setEnabled(false);
+			file_ExtractRaw.setEnabled(false);
 			return;
 		}
 		else
 		{
 			file_Extract.setEnabled(true);
-			file_ExtractRaw.setEnabled(true);
+			file_ExtractConvert.setEnabled(true);
+			//file_ExtractRaw.setEnabled(true);
 		}
 
 		if (fileTree.getSelectedFiles().size() > 1)

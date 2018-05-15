@@ -71,8 +71,9 @@ public class Strings {
 	
 	public static final String MENUITEM_OPEN = "Open";
 	public static final String MENUITEM_CLOSE = "Close";
-	public static final String MENUITEM_EXTRACT = "Extract";
-	public static final String MENUITEM_EXTRACTRAW = "Extract Raw";
+	public static final String MENUITEM_EXTRACT = "Save File";
+	public static final String MENUITEM_EXTRACTCONVERT = "Save and Convert File";
+	public static final String MENUITEM_EXTRACTRAW = "Save as Raw File";
 	public static final String MENUITEM_SEARCH = "Search";
 	public static final String MENUITEM_SEARCHAGAIN = "Search Again";
 	public static final String MENUITEM_MODELVIEWER = "Model Viewer";
