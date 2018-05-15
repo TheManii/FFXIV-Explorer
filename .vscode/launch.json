@@ -12,15 +12,8 @@
             "console": "internalConsole",
             "stopOnEntry": false,
             "mainClass": "com.fragmenterworks.ffxivextract.Main",
-            "projectName": "ffxiv-explorer",
+            "projectName": "ffxivextract",
             "args": ""
-        },
-        {
-            "type": "java",
-            "name": "Debug (Attach)",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": 0
         }
     ]
 }
