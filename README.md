@@ -36,13 +36,15 @@ Requirements
 
 ### Versions:  
 
-| Expansion Name                     | Status        | \| | Benchmark Name                                       | Status          |  
-|------------------------------------|--------------:|----|------------------------------------------------------|----------------:|  
-| Final Fantasy XIV (1.0)            | Not supported | \| | Final Fantasy XIV Benchmark (1.0)                    |   Not supported |  
-| A Realm Reborn Alpha/Beta (2.0α/β) |     Supported | \| | A Realm Reborn Benchmark (Character Creation) (2.0α) |       Supported |  
-| A Realm Reborn (2.0)               |     Supported | \| | A Realm Reborn Benchmark (Exploration) (2.0β/2.0)    |       Supported |  
-| Heavensward (3.0)                  |     Supported | \| | Heavensward Benchmark (3.0)                          | Limited support |  
-| Stormblood (4.0)                   |     Supported | \| | Stormblood Benchmark (4.0)                           | Limited support |  
+| Expansion Name                     | Status          | \| | Benchmark Name                                       | Status          |  
+|------------------------------------|----------------:|----|------------------------------------------------------|----------------:|  
+| Final Fantasy XIV (1.0)            |   Not supported | \| | Final Fantasy XIV Benchmark (1.0)                    |   Not supported |  
+| A Realm Reborn Alpha/Beta (2.0α/β) |       Supported | \| | A Realm Reborn Benchmark (Character Creation) (2.0α) |       Supported |  
+| A Realm Reborn (2.0)               |       Supported | \| | A Realm Reborn Benchmark (Exploration) (2.0β/2.0)    |       Supported |  
+| Heavensward (3.0)                  | Limited support | \| | Heavensward Benchmark (3.0)                          | Limited support |  
+| Stormblood (4.0)                   | Limited support | \| | Stormblood Benchmark (4.0)                           | Limited support |  
+
+> Working with index2 results in no file paths being available to the user, all entries are hashes
 
 
 Building from source
@@ -77,11 +79,11 @@ Building from source
     * For IDEA
         * Open the folder
         * Download the missing dependencies:
-            * Google Gson 2.8.4
+            * Java SQLite-jdbc 3.21.0.1
             * JCraft JZlib 1.1.3
             * JOAMP JOGL 2.3.2/b1473 (and all subpackages)
             * JOAMP Gluegen 2.3.2/b904 (and all subpackages)
-            * Java SQLite-jdbc 3.21.0.1
+            * Google Gson 2.8.4
         * Add dependency JARs to `<path to source code>\libs`
             > Place the JARs directly in `libs`, do not include folders
         * Go to `Build` → `Build Artifacts`
