@@ -36,13 +36,13 @@ Requirements
 
 ### Versions:  
 
-| Expansion Name                     | Status        | \| | Benchmark Name                                       |     Status    |  
-|------------------------------------|--------------:|----|------------------------------------------------------|--------------:|  
-| Final Fantasy XIV (1.0)            | Not supported | \| | Final Fantasy XIV Benchmark (1.0)                    | Not supported |  
-| A Realm Reborn Alpha/Beta (2.0α/β) |     Supported | \| | A Realm Reborn Benchmark (Character Creation) (2.0α) |     Supported |  
-| A Realm Reborn (2.0)               |     Supported | \| | A Realm Reborn Benchmark (Exploration) (2.0β/2.0)    |     Supported |  
-| Heavensward (3.0)                  |     Supported | \| | Heavensward Benchmark (3.0)                          |     Supported |  
-| Stormblood (4.0)                   |     Supported | \| | Stormblood Benchmark (4.0)                           |     Supported |  
+| Expansion Name                     | Status        | \| | Benchmark Name                                       | Status          |  
+|------------------------------------|--------------:|----|------------------------------------------------------|----------------:|  
+| Final Fantasy XIV (1.0)            | Not supported | \| | Final Fantasy XIV Benchmark (1.0)                    |   Not supported |  
+| A Realm Reborn Alpha/Beta (2.0α/β) |     Supported | \| | A Realm Reborn Benchmark (Character Creation) (2.0α) |       Supported |  
+| A Realm Reborn (2.0)               |     Supported | \| | A Realm Reborn Benchmark (Exploration) (2.0β/2.0)    |       Supported |  
+| Heavensward (3.0)                  |     Supported | \| | Heavensward Benchmark (3.0)                          | Limited support |  
+| Stormblood (4.0)                   |     Supported | \| | Stormblood Benchmark (4.0)                           | Limited support |  
 
 
 Building from source
@@ -52,6 +52,7 @@ Building from source
     * A suitable JDK
         * OpenJDK 1.8-RedHat
         * Java SE JDK 1.8
+    * An active internet connection (When compiling with Maven/VS Code)
 
 * Supported Projects:
     * Apache Maven 3.5
@@ -77,8 +78,8 @@ Building from source
         * Open the folder
         * Download the missing dependencies:
             * Google Gson 2.8.4
-            * JOAMP JOGL 2.3.2/b1473
-            * JOAMP Gluegen 2.3.2/b904
+            * JOAMP JOGL 2.3.2/b1473 (and all subpackages)
+            * JOAMP Gluegen 2.3.2/b904 (and all subpackages)
             * Java SQLite-jdbc 3.21.0.1
         * Add dependency JARs to `<path to source code>\libs`
             > Place the JARs directly in `libs`, do not include folders
