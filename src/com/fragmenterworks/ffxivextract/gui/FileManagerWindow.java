@@ -191,36 +191,36 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		fl_pnlInfo.setVgap(4);
 		pnlInfo.setBorder(null);
 		pnlStatusBar.add(pnlInfo, BorderLayout.WEST);
-		
-		JLabel lblHash = new JLabel("Hash URI: ");
-		pnlInfo.add(lblHash);
-		
-		lblHashValue = new JLabel("*");
-		pnlInfo.add(lblHashValue);
-		
+
+		JLabel lblContentType = new JLabel("Content Type: ");
+		pnlInfo.add(lblContentType);
+
+		lblContentTypeValue = new JLabel("*");
+		pnlInfo.add(lblContentTypeValue);
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setPreferredSize(new Dimension(1, 16));
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		pnlInfo.add(separator_1);
-		
-		JLabel lblOffset = new JLabel("Offset URI: ");
-		pnlInfo.add(lblOffset);
-		lblOffset.setHorizontalAlignment(SwingConstants.LEFT);
-		
-		lblOffsetValue = new JLabel("*");
-		pnlInfo.add(lblOffsetValue);
-		
+
+		JLabel lblHash = new JLabel("Hash URI: ");
+		pnlInfo.add(lblHash);
+
+		lblHashValue = new JLabel("*");
+		pnlInfo.add(lblHashValue);
+
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setPreferredSize(new Dimension(1, 16));
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		pnlInfo.add(separator_2);
-		
-		JLabel lblContentType = new JLabel("Content Type: ");
-		pnlInfo.add(lblContentType);
-		
-		lblContentTypeValue = new JLabel("*");
-		pnlInfo.add(lblContentTypeValue);
-		
+
+		JLabel lblOffset = new JLabel("Offset URI: ");
+		pnlInfo.add(lblOffset);
+		lblOffset.setHorizontalAlignment(SwingConstants.LEFT);
+
+		lblOffsetValue = new JLabel("*");
+		pnlInfo.add(lblOffsetValue);
+
 		JPanel pnlProgBar = new JPanel();
 		pnlStatusBar.add(pnlProgBar, BorderLayout.EAST);
 		
