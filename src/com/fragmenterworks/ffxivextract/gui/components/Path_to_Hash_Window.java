@@ -111,13 +111,21 @@ public class Path_to_Hash_Window extends JFrame {
 				.toLowerCase();
 		String filename = path.substring(path.lastIndexOf('/') + 1,
 				path.length());
+		String fullPath = folder + "/" + filename;
 
 		int folderHash = HashDatabase.computeCRC(folder.getBytes(), 0,
 				folder.getBytes().length);
 		int fileHash = HashDatabase.computeCRC(filename.getBytes(), 0,
-				filename.getBytes().length);		
+				filename.getBytes().length);	
+		int fullPathHash = HashDatabase.computeCRC(fullPath.getBytes(), 0,
+				fullPath.getBytes().length);	
 		
-		txtOutput.setText(Strings.PATHTOHASH_FOLDER_HASH + String.format("0x%08X (%s)", folderHash, Long.toString(folderHash & 0xFFFFFFFFL)) + "\n" + Strings.PATHTOHASH_FILE_HASH + String.format("0x%08X (%s)", fileHash, Long.toString(fileHash & 0xFFFFFFFFL)));
+		txtOutput.setText
+		(
+			Strings.PATHTOHASH_FOLDER_HASH   + String.format("0x%08X", folderHash)   + "\n" + 
+			Strings.PATHTOHASH_FILE_HASH     + String.format("0x%08X", fileHash)     + "\n" + 
+			Strings.PATHTOHASH_FULLPATH_HASH + String.format("0x%08X", fullPathHash)
+		);
 	}
 
 }
