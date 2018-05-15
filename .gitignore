@@ -4,6 +4,9 @@ hs_err_pid*
 
 Thumbs.db
 
+# Ignore IDEA project libs
+libs/
+
 # Ignore artifacts
 out/
 target/
