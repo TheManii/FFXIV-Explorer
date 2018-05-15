@@ -8,7 +8,7 @@
             "type": "java",
             "name": "Debug (Launch)-Main<ffxiv-explorer>",
             "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}\\target",
             "console": "internalConsole",
             "stopOnEntry": false,
             "mainClass": "com.fragmenterworks.ffxivextract.Main",

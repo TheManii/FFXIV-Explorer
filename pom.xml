@@ -69,39 +69,8 @@
             </plugin>
 
             <plugin>
-                <groupId>com.coderplus.maven.plugins</groupId>
-                <artifactId>copy-rename-maven-plugin</artifactId>
-                <version>1.0</version>
-                <executions>
-                    <execution>
-                        <id>copy</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                        <fileSets>
-                            <fileSet>
-                                <sourceFile>hashlist.db</sourceFile>
-                                <destinationFile>target/hashlist.db</destinationFile>
-                            </fileSet>
-                            <fileSet>
-                                <sourceFile>monsters.lst</sourceFile>
-                                <destinationFile>target/monsters.lst</destinationFile>
-                            </fileSet>
-                            <fileSet>
-                                <sourceFile>luadec.dll</sourceFile>
-                                <destinationFile>target/luadec.dll</destinationFile>
-                            </fileSet>
-                        </fileSets>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- maven-compiler-plugin seems to choke for some reason if we uncomment this -->
-                <!-- <groupId>org.apache.maven.plugins</groupId> -->
+                 <!-- maven-compiler-plugin seems to choke for some reason if we uncomment this -->
+                 <!-- <groupId>org.apache.maven.plugins</groupId> -->
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
@@ -112,11 +81,11 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>target/tablenames</outputDirectory>
+                            <outputDirectory>target</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>tablenames</directory>
-                                    <filtering>true</filtering>
+                                    <directory>resources</directory>
+                                    <filtering>false</filtering>
                                 </resource>
                             </resources>
                         </configuration>
