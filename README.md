@@ -89,3 +89,4 @@ Building from source
             > Place the JARs directly in `libs`, do not include folders
         * Go to `Build` → `Build Artifacts`
         * Output is in `<path to source code>\out`
+            * Manually copy contents of `<path to source code>\resources` into `<path to source code>\out`
