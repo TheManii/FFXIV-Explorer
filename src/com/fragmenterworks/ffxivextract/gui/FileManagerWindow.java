@@ -191,23 +191,23 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		pnlInfo.setBorder(null);
 		pnlStatusBar.add(pnlInfo, BorderLayout.WEST);
 		
-		JLabel lblOffset = new JLabel("Offset: ");
-		pnlInfo.add(lblOffset);
-		lblOffset.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblHash = new JLabel("Hash URI: ");
+		pnlInfo.add(lblHash);
 		
-		lblOffsetValue = new JLabel("*");
-		pnlInfo.add(lblOffsetValue);
+		lblHashValue = new JLabel("*");
+		pnlInfo.add(lblHashValue);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setPreferredSize(new Dimension(1, 16));
 		separator_1.setOrientation(SwingConstants.VERTICAL);
 		pnlInfo.add(separator_1);
 		
-		JLabel lblHash = new JLabel("Hash: ");
-		pnlInfo.add(lblHash);
+		JLabel lblOffset = new JLabel("Offset URI: ");
+		pnlInfo.add(lblOffset);
+		lblOffset.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		lblHashValue = new JLabel("*");
-		pnlInfo.add(lblHashValue);
+		lblOffsetValue = new JLabel("*");
+		pnlInfo.add(lblOffsetValue);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setPreferredSize(new Dimension(1, 16));
@@ -668,14 +668,40 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 		}
 		else
 		{
-			int datNum = (int) ((fileTree.getSelectedFiles().get(0).getOffset() & 0x000F) / 2);
+			String hashUri = "ffxiv://" + currentIndexFile.getName() + "/hash/";
 			
-			lblOffsetValue.setText(String.format("0x%08X",fileTree.getSelectedFiles().get(0).getOffset()*0x8 - (datNum * 0x10)) + " (Dat: " + datNum +")");
-			lblHashValue.setText(String.format("0x%08X",fileTree.getSelectedFiles().get(0).getId()));
-			try{
-				System.out.print(currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset()));
-				String type = "";
+			// hash1 is either the fileHash for index1, or fullPathHash for index2
+			int hash1 = fileTree.getSelectedFiles().get(0).getId();
+			// hash2 is either folderHash for index1, or 0xFFFFFFFF for index2
+			int hash2 = fileTree.getSelectedFiles().get(0).getId2();
 
+			// We technically can't display a unified hash Uri:
+			// ffxiv://<currentIndexFile>/hash/<folderHash>/<fileHash>?<fullPathHash>
+			// due to the fact we can only open either an index1 or an index2, and not both
+			if (hash2 != 0xFFFFFFFF)
+			{
+				// We are in an index1
+				hashUri += String.format("0x%08X/0x%08X", hash2, hash1);
+			}
+			else
+			{
+				// We are in an index2
+				hashUri += String.format("0x%08X", hash1);
+			}
+
+			String offsetUri = "ffxiv://" + currentIndexFile.getName();
+			int datNum = (int) ((fileTree.getSelectedFiles().get(0).getOffset() & 0x000F) / 2);
+			if(datNum > 0)
+			{
+				offsetUri += ":" + datNum;
+			}
+			offsetUri += "/offset/" + String.format("0x%08X",fileTree.getSelectedFiles().get(0).getOffset()*0x8 - (datNum * 0x10));
+
+			lblOffsetValue.setText(offsetUri);
+			lblHashValue.setText(hashUri);
+
+			String type = "";
+			try{
 				switch (currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset()))
 				{
 					case 1: type = "Type-1 (Placeholder)"; break;

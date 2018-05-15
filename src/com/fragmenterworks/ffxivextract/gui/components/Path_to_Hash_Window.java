@@ -36,7 +36,7 @@ public class Path_to_Hash_Window extends JFrame {
 		URL imageURL = getClass().getResource("/res/frameicon.png");
 		ImageIcon image = new ImageIcon(imageURL);
 		this.setIconImage(image.getImage());
-		setBounds(100, 100, 510, 220);
+		setBounds(100, 100, 544, 196);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));		
@@ -112,6 +112,7 @@ public class Path_to_Hash_Window extends JFrame {
 		String filename = path.substring(path.lastIndexOf('/') + 1,
 				path.length());
 		String fullPath = folder + "/" + filename;
+		
 
 		int folderHash = HashDatabase.computeCRC(folder.getBytes(), 0,
 				folder.getBytes().length);
@@ -119,12 +120,15 @@ public class Path_to_Hash_Window extends JFrame {
 				filename.getBytes().length);	
 		int fullPathHash = HashDatabase.computeCRC(fullPath.getBytes(), 0,
 				fullPath.getBytes().length);	
+
+		String Uri = String.format("ffxiv://<volume>/hash/0x%08X/0x%08X?0x%08X", folderHash, fileHash, fullPathHash);
 		
 		txtOutput.setText
 		(
 			Strings.PATHTOHASH_FOLDER_HASH   + String.format("0x%08X", folderHash)   + "\n" + 
 			Strings.PATHTOHASH_FILE_HASH     + String.format("0x%08X", fileHash)     + "\n" + 
-			Strings.PATHTOHASH_FULLPATH_HASH + String.format("0x%08X", fullPathHash)
+			Strings.PATHTOHASH_FULLPATH_HASH + String.format("0x%08X", fullPathHash) + "\n" + 
+			Strings.PATHTOHASH_URI           + Uri
 		);
 	}
 

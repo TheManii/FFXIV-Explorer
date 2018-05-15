@@ -289,7 +289,7 @@ public class SqPack_IndexFile {
 			this.fileIndexOffset = fileIndexOffset;
 			this.name = HashDatabase.getFolder(id);
 			if (this.name == null)
-				this.name = String.format("~%x", id);
+				this.name = String.format("❓0x%08X", id);
 			//else
 				//HashDatabase.flagFolderNameAsUsed(id);
 		}
@@ -394,7 +394,7 @@ public class SqPack_IndexFile {
 				if (id2 != -1)
 					this.name = HashDatabase.getFileName(id);
 				if (this.name == null)
-					this.name = String.format("~%x", id);
+					this.name = String.format("❓0x%08X", id);
 				
 			}
 			//else
@@ -429,7 +429,7 @@ public class SqPack_IndexFile {
 			if (id2 != -1)
 				name = HashDatabase.getFileName(id);
 			if (name == null)
-				name = String.format("~%x", id);
+				name = String.format("❓0x%08X", id);
 			return name;
 		}
 	}

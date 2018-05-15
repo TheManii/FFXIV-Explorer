@@ -40,9 +40,10 @@ public class Strings {
 	//Path to Hash Tool
 	public static final String PATHTOHASH_TITLE = "Path -> Hash Calculator";
 	public static final String PATHTOHASH_PATH = "Path: ";
-	public static final String PATHTOHASH_FOLDER_HASH = "Folder Hash: ";
-	public static final String PATHTOHASH_FILE_HASH = "File Hash: ";
+	public static final String PATHTOHASH_FOLDER_HASH   = "Folder Hash:    ";
+	public static final String PATHTOHASH_FILE_HASH     = "File Hash:      ";
 	public static final String PATHTOHASH_FULLPATH_HASH = "Full Path Hash: ";
+	public static final String PATHTOHASH_URI = "Hash Uri: ";
 	public static final String PATHTOHASH_BUTTON_HASHTHIS = "Calculate";
 	public static final String PATHTOHASH_BUTTON_CLOSE = "Close";
 	public static final String PATHTOHASH_INTRO = "Set a valid path in the form of \"folder/subfolder/file.ext\"\nand click calculate.";
