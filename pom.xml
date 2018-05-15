@@ -4,24 +4,24 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.fragmenterworks.ffxivextract</groupId>
-    <artifactId>ffxiv-explorer</artifactId>
+    <groupId>com.fragmenterworks</groupId>
+    <artifactId>ffxivextract</artifactId>
     <version>1.8</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-
 
     <build>
         <sourceDirectory>.</sourceDirectory>
-
         <resources>
             <resource>
                 <directory>src</directory>
                 <excludes>
+                    <!-- The source path layout is a mess from the origin
+                         we keep them as-is for consistancy reasons -->
                     <exclude>META-INF/**</exclude>
                     <exclude>ca/**</exclude>
                     <exclude>com/**</exclude>
@@ -34,24 +34,27 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
-                <includes>
-                    <include>src/ca/**/*.java</include>
-                    <include>src/com/**/*.java</include>
-                </includes>
+                    <includes>
+                        <include>src/ca/**/*.java</include>
+                        <include>src/com/**/*.java</include>
+                    </includes>
                 </configuration>
             </plugin>
 
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
-                    <manifest>
-                        <mainClass>com.fragmenterworks.ffxivextract.Main</mainClass>
-                    </manifest>
+                        <manifest>
+                            <mainClass>com.fragmenterworks.ffxivextract.Main</mainClass>
+                        </manifest>
                     </archive>
                     <descriptorRefs>
-                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
                 <executions>
@@ -97,8 +100,10 @@
             </plugin>
 
             <plugin>
+                <!-- maven-compiler-plugin seems to choke for some reason if we uncomment this -->
+                <!-- <groupId>org.apache.maven.plugins</groupId> -->
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.6</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -145,7 +150,6 @@
             <artifactId>jogl-main</artifactId>
             <version>2.3.2</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.jogamp.jogl</groupId>
