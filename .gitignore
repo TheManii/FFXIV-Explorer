@@ -1,25 +1,6 @@
-*.class
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.war
-*.ear
-
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-*.classpath
-.project
-bin/
-.cproject
-.settings/
-*.o
-*.jar
-execonfig.xml
-*.cmp
 
-!/luadec.dll
 
 Thumbs.db
 
