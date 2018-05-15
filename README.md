@@ -78,6 +78,7 @@ Building from source
         * Open the folder
         * Download the missing dependencies:
             * Google Gson 2.8.4
+            * JCraft JZlib 1.1.3
             * JOAMP JOGL 2.3.2/b1473 (and all subpackages)
             * JOAMP Gluegen 2.3.2/b904 (and all subpackages)
             * Java SQLite-jdbc 3.21.0.1
