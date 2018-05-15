@@ -673,7 +673,18 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			lblOffsetValue.setText(String.format("0x%08X",fileTree.getSelectedFiles().get(0).getOffset()*0x8 - (datNum * 0x10)) + " (Dat: " + datNum +")");
 			lblHashValue.setText(String.format("0x%08X",fileTree.getSelectedFiles().get(0).getId()));
 			try{
-				lblContentTypeValue.setText(""+currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset()));
+				System.out.print(currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset()));
+				String type = "";
+
+				switch (currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset()))
+				{
+					case 1: type = "Type-1 (Placeholder)"; break;
+					case 2: type = "Type-2 (Binary)";      break;
+					case 3: type = "Type-3 (Model)";       break;
+					case 4: type = "Type-4 (Texture)";     break;
+					default: type = String.format("Type-%01d (Unknown)", currentIndexFile.getContentType(fileTree.getSelectedFiles().get(0).getOffset())); break;
+				}
+				lblContentTypeValue.setText(type);
 			}
 			catch (IOException ioe)
 			{
