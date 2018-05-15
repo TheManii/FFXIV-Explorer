@@ -62,6 +62,7 @@ Building from source
         * VS Code requires Maven to compile
     * IntelliJ IDEA 2018.1.3
 
+    > While there are Eclipse project files, they are exclusively for the use of VS code, Eclipse itself is **NOT** supported
 
 * How to build
     * Clone or download the source code
@@ -87,4 +88,4 @@ Building from source
         * Add dependency JARs to `<path to source code>\libs`
             > Place the JARs directly in `libs`, do not include folders
         * Go to `Build` → `Build Artifacts`
-        * Output is in `<path to source code>\target`
+        * Output is in `<path to source code>\out`
