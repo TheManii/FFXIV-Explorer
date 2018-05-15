@@ -11,12 +11,9 @@
 hs_err_pid*
 *.classpath
 .project
-.settings/org.eclipse.jdt.core.prefs
 bin/
 .cproject
-.settings/org.eclipse.cdt.codan.core.prefs
-.settings/org.eclipse.cdt.managedbuilder.core.prefs
-.settings/org.eclipse.core.resources.prefs
+.settings/
 *.o
 *.jar
 execonfig.xml
