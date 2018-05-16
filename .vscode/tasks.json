@@ -18,6 +18,13 @@
             "command": "${config:maven.executable.path} -f \"${workspaceFolder}/pom.xml\" clean",
             "group": "none",
             "problemMatcher": []
+        },
+        {
+            "label": "update dependencies",
+            "type": "shell",
+            "command": "${config:maven.executable.path} dependency:resolve",
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }

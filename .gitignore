@@ -7,6 +7,9 @@ Thumbs.db
 # Ignore IDEA project libs
 libs/
 
+# Ignore VS code user specific project settings
+.vscode/settings.json
+
 # Ignore artifacts
 out/
 target/
