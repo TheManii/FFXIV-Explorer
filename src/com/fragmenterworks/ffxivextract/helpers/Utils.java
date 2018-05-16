@@ -98,4 +98,19 @@ public class Utils {
        return bFile;
     }
     
+    public static String getOffsetUri(String volumeName, Long storedOffset)
+    {
+        String Uri = "ffxiv://" + volumeName;
+
+        short datNum = (short)((storedOffset & 0x000F) / 2);
+        Long offset = ((storedOffset * 8) - ((storedOffset & 0x0f) /2));
+        
+		if(datNum > 0)
+		{
+			Uri += ":" + datNum;
+		}
+		Uri += "/offset/" + String.format("0x%08X", offset);
+
+        return Uri;
+    }
 }

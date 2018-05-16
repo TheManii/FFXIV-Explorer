@@ -68,6 +68,7 @@ import com.fragmenterworks.ffxivextract.gui.outfitter.OutfitterWindow;
 import com.fragmenterworks.ffxivextract.helpers.HashFinding_Utils;
 import com.fragmenterworks.ffxivextract.helpers.HavokNative;
 import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
+import com.fragmenterworks.ffxivextract.helpers.Utils;
 import ca.fraggergames.ffxivextract.helpers.LuaDec;
 import com.fragmenterworks.ffxivextract.helpers.WavefrontObjectWriter;
 import com.fragmenterworks.ffxivextract.models.AVFX_File;
@@ -400,15 +401,15 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 			}
 			else if (event.getActionCommand().equals("musicswapper"))
 			{
-				MusicSwapperWindow swapper = new MusicSwapperWindow();
+				MusicSwapperWindow swapper = new MusicSwapperWindow(true);
 				swapper.setLocationRelativeTo(FileManagerWindow.this);
 				swapper.setVisible(true);
 			}
 			else if (event.getActionCommand().equals("fileinject"))
             {
-				FileInjectorWindow injector = new FileInjectorWindow();
-				injector.setLocationRelativeTo(FileManagerWindow.this);
-				injector.setVisible(true);
+				MusicSwapperWindow swapper = new MusicSwapperWindow(false);
+				swapper.setLocationRelativeTo(FileManagerWindow.this);
+				swapper.setVisible(true);
             }
 			else if (event.getActionCommand().equals("macroeditor"))
 			{
@@ -703,15 +704,7 @@ public class FileManagerWindow extends JFrame implements TreeSelectionListener, 
 				hashUri += String.format("0x%08X", hash1);
 			}
 
-			String offsetUri = "ffxiv://" + currentIndexFile.getName();
-			int datNum = (int) ((fileTree.getSelectedFiles().get(0).getOffset() & 0x000F) / 2);
-			if(datNum > 0)
-			{
-				offsetUri += ":" + datNum;
-			}
-			offsetUri += "/offset/" + String.format("0x%08X",fileTree.getSelectedFiles().get(0).getOffset()*0x8 - (datNum * 0x10));
-
-			lblOffsetValue.setText(offsetUri);
+			lblOffsetValue.setText(Utils.getOffsetUri(currentIndexFile.getName(), fileTree.getSelectedFiles().get(0).getOffset()));
 			lblHashValue.setText(hashUri);
 
 			String type = "";

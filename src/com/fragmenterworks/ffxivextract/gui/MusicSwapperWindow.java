@@ -44,6 +44,7 @@ import javax.swing.filechooser.FileFilter;
 
 import com.fragmenterworks.ffxivextract.helpers.DatBuilder;
 import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
+import com.fragmenterworks.ffxivextract.helpers.Utils;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_File;
 
@@ -90,9 +91,18 @@ public class MusicSwapperWindow extends JFrame {
 	private JLabel lblGenerateMessage;
 	private JPanel panel_7;
 	private JButton btnOgg2Scd;
+	private Boolean isMusicInjectorWindow;
 	
-	public MusicSwapperWindow() {
-		this.setTitle(Strings.DIALOG_TITLE_MUSICSWAPPER);
+	public MusicSwapperWindow(Boolean windowType) {
+		isMusicInjectorWindow = windowType;
+		if(isMusicInjectorWindow)
+		{
+			this.setTitle(Strings.DIALOG_TITLE_MUSICSWAPPER);
+		}
+		else
+		{
+			this.setTitle(Strings.DIALOG_TITLE_FILEINJECT);
+		}
 		URL imageURL = getClass().getResource("/res/frameicon.png");
 		ImageIcon image = new ImageIcon(imageURL);
 		this.setIconImage(image.getImage());
@@ -107,13 +117,27 @@ public class MusicSwapperWindow extends JFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JPanel pnlMusicArchive = new JPanel();
-		pnlMusicArchive.setBorder(new TitledBorder(null, Strings.MUSICSWAPPER_FRAMETITLE_ARCHIVE, TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		if(isMusicInjectorWindow)
+		{
+			pnlMusicArchive.setBorder(new TitledBorder(null, Strings.MUSICSWAPPER_FRAMETITLE_ARCHIVE, TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		}
+		else
+		{
+			pnlMusicArchive.setBorder(new TitledBorder(null, Strings.FILEINJECT_FRAMETITLE_ARCHIVE, TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		}
 		panel.add(pnlMusicArchive);
 		pnlMusicArchive.setLayout(new BorderLayout(0, 0));
 		
 		txtDatPath = new JTextField();
 		txtDatPath.setEditable(false);
-		txtDatPath.setText(Strings.MUSICSWAPPER_DEFAULTPATHTEXT);
+		if(isMusicInjectorWindow)
+		{
+			txtDatPath.setText(Strings.MUSICSWAPPER_DEFAULTPATHTEXT);
+		}
+		else
+		{
+			txtDatPath.setText(Strings.FILEINJECT_DEFAULTPATHTEXT);
+		}
 		pnlMusicArchive.add(txtDatPath, BorderLayout.CENTER);
 		
 		JButton btnBrowse = new JButton(Strings.BUTTONNAMES_BROWSE);
@@ -144,7 +168,14 @@ public class MusicSwapperWindow extends JFrame {
 		panel_3.add(btnRestore);
 		
 		pnlCustomMusic = new JPanel();
-		pnlCustomMusic.setBorder(new TitledBorder(null, "Custom Music <Advance>", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		if(isMusicInjectorWindow)
+		{
+			pnlCustomMusic.setBorder(new TitledBorder(null, "Custom Music <Advance>", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		}
+		else
+		{
+			pnlCustomMusic.setBorder(new TitledBorder(null, "Custom Files <Advance>", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		}
 		panel.add(pnlCustomMusic);
 		pnlCustomMusic.setLayout(new BorderLayout(0, 0));
 		
@@ -229,10 +260,10 @@ public class MusicSwapperWindow extends JFrame {
 					lstSet.clearSelection();
 					return;
 				}
-				
+
 				if (event.getValueIsAdjusting() ||lstSet.getModel().getSize() == 0)
 					return;				
-				txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0xFFFFFFFF));
+				txtSetTo.setText(Strings.MUSICSWAPPER_CURRENTOFFSET + Utils.getOffsetUri(originalMusicFile.getName(), editedFiles[lstOriginal.getSelectedIndex()].getOffset()));
 				if (editedFiles[lstOriginal.getSelectedIndex()].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[lstOriginal.getSelectedIndex()].dataoffset)
 					txtSetTo.setForeground(Color.RED);
 				else
@@ -346,22 +377,25 @@ public class MusicSwapperWindow extends JFrame {
 				fileChooser.setMultiSelectionEnabled(true);
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-				FileFilter filter = new FileFilter() {
+				if(isMusicInjectorWindow)
+				{
+					FileFilter filter = new FileFilter() {
 
-					@Override
-					public String getDescription() {
-						return "Square Enix SCD File";
-					}
+						@Override
+						public String getDescription() {
+							return "Square Enix SCD File";
+						}
 
-					@Override
-					public boolean accept(File f) {
-						return f.getName().endsWith(".scd")
-								|| f.isDirectory();
-					}
-				};
-				fileChooser.addChoosableFileFilter(filter);
-				fileChooser.setFileFilter(filter);
-				fileChooser.setAcceptAllFileFilterUsed(false);
+						@Override
+						public boolean accept(File f) {
+							return f.getName().endsWith(".scd")
+									|| f.isDirectory();
+						}
+					};
+					fileChooser.addChoosableFileFilter(filter);
+					fileChooser.setFileFilter(filter);
+					fileChooser.setAcceptAllFileFilterUsed(false);
+				}
 
 				int retunval = fileChooser.showOpenDialog(MusicSwapperWindow.this);
 
@@ -472,10 +506,20 @@ public class MusicSwapperWindow extends JFrame {
 		pack();
 		setSwapperEnabled(false);
 		
-		JOptionPane.showMessageDialog(this,
+		if(isMusicInjectorWindow)
+		{
+			JOptionPane.showMessageDialog(this,
 				Strings.MSG_MUSICSWAPPER,
-			    Strings.MSG_MUSICSWAPPER_TITLE,
-			    JOptionPane.INFORMATION_MESSAGE);
+				Strings.MSG_MUSICSWAPPER_TITLE,
+				JOptionPane.INFORMATION_MESSAGE);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(this,
+				Strings.MSG_FILEINJECT,
+				Strings.MSG_FILEINJECT_TITLE,
+				JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 	
 	public void setPath() {
@@ -487,14 +531,29 @@ public class MusicSwapperWindow extends JFrame {
 
 			@Override
 			public String getDescription() {
-				return Strings.FILETYPE_FFXIV_MUSICINDEX;
+				if(isMusicInjectorWindow)
+				{
+					return Strings.FILETYPE_FFXIV_MUSICINDEX;
+				}
+				else
+				{
+					return "sqpack index file";
+				}
 			}
 
 			@Override
 			public boolean accept(File f) {
-				return f.getName().equals("0c0000.win32.index") ||
-					   f.getName().equals("0c0100.win32.index")
+				if(isMusicInjectorWindow)
+				{
+					return f.getName().equals("0c0000.win32.index") ||
+							f.getName().equals("0c0100.win32.index")
+							|| f.isDirectory();
+				}
+				else
+				{
+					return f.getName().contains("index")
 						|| f.isDirectory();
+				}
 			}
 		};
 		fileChooser.addChoosableFileFilter(filter);
@@ -607,7 +666,7 @@ public class MusicSwapperWindow extends JFrame {
 		loadCustomDatIndexList();
 		
 		//Init this since the list listener doesn't fire
-		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[lstOriginal.getSelectedIndex()].getOffset() & 0xFFFFFFFF));
+		txtSetTo.setText(Strings.MUSICSWAPPER_CURRENTOFFSET + Utils.getOffsetUri(originalMusicFile.getName(), editedFiles[lstOriginal.getSelectedIndex()].getOffset()));
 		if (editedFiles[lstOriginal.getSelectedIndex()].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[lstOriginal.getSelectedIndex()].dataoffset)
 			txtSetTo.setForeground(Color.RED);
 		else
@@ -623,9 +682,9 @@ public class MusicSwapperWindow extends JFrame {
 			String fileName = files[i].getName2();
 			
 			if (fileName !=null)
-				listModel.addElement(String.format("%s (%08X)", fileName, files[i].getOffset() & 0xFFFFFFFF));
+				listModel.addElement(String.format("%s (0x%08X)", fileName, (files[i].getOffset() * 8) - ((files[i].getOffset() & 0x0f) / 2)));
 			else
-				listModel.addElement(String.format("%08X (%08X)", files[i].id & 0xFFFFFFFF, files[i].getOffset() & 0xFFFFFFFF));
+				listModel.addElement(String.format("%08X (0x%08X)", files[i].id & 0xFFFFFFFF, (files[i].getOffset() * 8) - ((files[i].getOffset() & 0x0f) / 2)));
 		}
 			
 		list.setSelectedIndex(0);
@@ -667,7 +726,7 @@ public class MusicSwapperWindow extends JFrame {
 		setSwapperEnabled(true);
 			
 		//Init this since the list listener doesn't fire		
-		txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, editedFiles[0].getOffset() & 0xFFFFFFFF));
+		txtSetTo.setText(Strings.MUSICSWAPPER_CURRENTOFFSET + Utils.getOffsetUri(originalMusicFile.getName(), editedFiles[0].getOffset()));
 		if (editedFiles[0].getOffset() != originalMusicFile.getPackFolders()[0].getFiles()[0].dataoffset)
 			txtSetTo.setForeground(Color.RED);
 		else
@@ -828,7 +887,7 @@ public class MusicSwapperWindow extends JFrame {
 						
 			ref.close();
 			
-			txtSetTo.setText(String.format(Strings.MUSICSWAPPER_CURRENTOFFSET, tooffset & 0xFFFFFFFF));
+			txtSetTo.setText(Strings.MUSICSWAPPER_CURRENTOFFSET + Utils.getOffsetUri(originalMusicFile.getName(), tooffset));
 			if (toBeChanged.getOffset() != tooffset)
 				txtSetTo.setForeground(Color.RED);
 			else
