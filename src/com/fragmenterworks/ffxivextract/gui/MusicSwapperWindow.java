@@ -63,7 +63,6 @@ public class MusicSwapperWindow extends JFrame {
 	private Hashtable<Integer, Integer> originalPositionTable = new Hashtable<Integer, Integer>(); //Fucking hack, but this is my fix if we want alphabetical sort
 
 	Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
-	File lastOpenedIndexFile = null;
 
 	//CUSTOM MUSIC STUFF
 	private int currentDatIndex;
@@ -112,7 +111,7 @@ public class MusicSwapperWindow extends JFrame {
 		this.setIconImage(image.getImage());
 
 		if (prefs.get(Constants.PREF_LASTOPENED, null) != null)
-		lastOpenedIndexFile = new File(prefs.get(Constants.PREF_LASTOPENED, null));
+		lastOpenedFile = new File(prefs.get(Constants.PREF_LASTOPENED, null));
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -530,7 +529,7 @@ public class MusicSwapperWindow extends JFrame {
 	}
 	
 	public void setPath() {
-		JFileChooser fileChooser = new JFileChooser(lastOpenedIndexFile);
+		JFileChooser fileChooser = new JFileChooser(lastOpenedFile);
 
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -571,10 +570,10 @@ public class MusicSwapperWindow extends JFrame {
 
 		if (retunval == JFileChooser.APPROVE_OPTION)
 		{
-			lastOpenedIndexFile = fileChooser.getSelectedFile();
+			lastOpenedFile = fileChooser.getSelectedFile();
 
 			Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
-			prefs.put(Constants.PREF_LASTOPENED, lastOpenedIndexFile.getAbsolutePath());					
+			prefs.put(Constants.PREF_LASTOPENED, lastOpenedFile.getAbsolutePath());					
 		}
 
 		if (retunval == JFileChooser.APPROVE_OPTION) {
