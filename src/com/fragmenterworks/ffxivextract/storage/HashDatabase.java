@@ -8,13 +8,11 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.fragmenterworks.ffxivextract.Constants;
-
 import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
 
 public class HashDatabase {

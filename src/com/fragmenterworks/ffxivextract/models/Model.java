@@ -1,7 +1,7 @@
 package com.fragmenterworks.ffxivextract.models;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.BufferOverflowException;
@@ -21,9 +21,9 @@ import com.fragmenterworks.ffxivextract.shaders.HairShader;
 import com.fragmenterworks.ffxivextract.shaders.IrisShader;
 import com.fragmenterworks.ffxivextract.shaders.Shader;
 import com.fragmenterworks.ffxivextract.shaders.SimpleShader;
-
 import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.storage.HashDatabase;
+
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GL3bc;

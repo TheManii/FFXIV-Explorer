@@ -1,11 +1,8 @@
 package com.fragmenterworks.ffxivextract.models;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 
 public class CMP_File {

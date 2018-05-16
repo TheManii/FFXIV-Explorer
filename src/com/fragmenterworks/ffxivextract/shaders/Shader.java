@@ -3,15 +3,12 @@ package com.fragmenterworks.ffxivextract.shaders;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 import com.fragmenterworks.ffxivextract.gui.components.OpenGL_View;
-import com.fragmenterworks.ffxivextract.helpers.Matrix;
 import com.fragmenterworks.ffxivextract.models.Material;
-import com.jogamp.opengl.GL3;
 
+import com.jogamp.opengl.GL3;
 
 public class Shader {
 

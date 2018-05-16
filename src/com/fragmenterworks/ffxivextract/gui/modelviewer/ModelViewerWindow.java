@@ -1,19 +1,16 @@
 package com.fragmenterworks.ffxivextract.gui.modelviewer;
 
 import java.awt.BorderLayout;
-import java.io.File;
+
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingWorker;
 
-import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.Strings;
 import com.fragmenterworks.ffxivextract.gui.components.EXDF_View;
 import com.fragmenterworks.ffxivextract.models.EXHF_File;

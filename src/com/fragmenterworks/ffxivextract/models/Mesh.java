@@ -5,8 +5,8 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 
 import com.fragmenterworks.ffxivextract.Constants;
+
 import com.jogamp.common.nio.Buffers;
-import com.jogamp.graph.geom.Vertex;
 
 public class Mesh{
 		

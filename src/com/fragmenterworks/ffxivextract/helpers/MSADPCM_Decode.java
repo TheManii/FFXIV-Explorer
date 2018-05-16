@@ -1,8 +1,5 @@
 package com.fragmenterworks.ffxivextract.helpers;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
 public class MSADPCM_Decode {
 
 	/* These are for MS-ADPCM */

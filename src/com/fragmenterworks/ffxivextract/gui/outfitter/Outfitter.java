@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -16,10 +15,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.border.BevelBorder;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -36,6 +37,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import com.bric.swing.ColorPicker;
+
 import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.gui.components.EXDF_View;
 import com.fragmenterworks.ffxivextract.gui.components.ModelCharacterRenderer;
@@ -44,16 +46,14 @@ import com.fragmenterworks.ffxivextract.gui.modelviewer.ItemChooserDialog;
 import com.fragmenterworks.ffxivextract.gui.modelviewer.ModelItemEntry;
 import com.fragmenterworks.ffxivextract.gui.modelviewer.ModelViewerWindow;
 import com.fragmenterworks.ffxivextract.helpers.SparseArray;
-import com.fragmenterworks.ffxivextract.models.EXHF_File;
 import com.fragmenterworks.ffxivextract.models.Model;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.storage.HashDatabase;
+
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.awt.GLCanvas;
-
-import javax.swing.border.BevelBorder;
 
 public class Outfitter extends JPanel {
 	

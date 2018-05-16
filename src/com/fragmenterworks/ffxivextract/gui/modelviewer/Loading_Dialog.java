@@ -1,29 +1,14 @@
 package com.fragmenterworks.ffxivextract.gui.modelviewer;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
+import java.awt.Component;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.SwingWorker;
 import javax.swing.border.EmptyBorder;
-
-import com.fragmenterworks.ffxivextract.Constants;
-import com.fragmenterworks.ffxivextract.storage.HashDatabase;
-
-import com.fragmenterworks.ffxivextract.gui.FileManagerWindow;
-import com.fragmenterworks.ffxivextract.gui.SearchWindow;
-import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
-
-import java.awt.Component;
 
 public class Loading_Dialog extends JDialog {
 

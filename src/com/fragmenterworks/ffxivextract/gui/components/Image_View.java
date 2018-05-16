@@ -1,15 +1,9 @@
 package com.fragmenterworks.ffxivextract.gui.components;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import javax.swing.AbstractListModel;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

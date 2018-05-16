@@ -13,7 +13,6 @@ import com.fragmenterworks.ffxivextract.shaders.BlendShader;
 import com.fragmenterworks.ffxivextract.shaders.BlurShader;
 import com.fragmenterworks.ffxivextract.shaders.DefaultShader;
 import com.fragmenterworks.ffxivextract.shaders.FXAAShader;
-import com.fragmenterworks.ffxivextract.shaders.HairShader;
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GL3bc;

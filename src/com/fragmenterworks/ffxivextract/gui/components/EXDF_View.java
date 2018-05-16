@@ -1,14 +1,33 @@
 package com.fragmenterworks.ffxivextract.gui.components;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.BorderLayout;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.FlowLayout;
+
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.UIManager;
 
+import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.helpers.FFXIV_String;
 import com.fragmenterworks.ffxivextract.helpers.SparseArray;
 import com.fragmenterworks.ffxivextract.models.EXDF_File;
@@ -16,36 +35,6 @@ import com.fragmenterworks.ffxivextract.models.EXDF_File.EXDF_Entry;
 import com.fragmenterworks.ffxivextract.models.EXHF_File.EXDF_Dataset;
 import com.fragmenterworks.ffxivextract.models.EXHF_File;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
-
-import javax.swing.JPanel;
-
-import javax.swing.border.TitledBorder;
-
-import java.awt.BorderLayout;
-
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-
-import java.awt.Component;
-
-import javax.swing.border.CompoundBorder;
-import javax.swing.UIManager;
-
-import java.awt.Color;
-
-import javax.swing.border.EmptyBorder;
-
-import java.awt.FlowLayout;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JComboBox;
-import javax.swing.SwingConstants;
-import javax.swing.DefaultComboBoxModel;
-
-import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.storage.HashDatabase;
 
 @SuppressWarnings("serial")

@@ -1,42 +1,27 @@
 package com.fragmenterworks.ffxivextract.gui;
 
-import java.io.File;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.prefs.Preferences;
 
+import javax.swing.BoxLayout;
+import javax.swing.border.TitledBorder;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.awt.BorderLayout;
-
-import javax.swing.BorderFactory;
-
-import java.awt.GridBagLayout;
-
 import javax.swing.JLabel;
-
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.BoxLayout;
 
 import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.Strings;

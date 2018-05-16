@@ -1,8 +1,5 @@
 package com.fragmenterworks.ffxivextract;
 
-import javax.swing.Icon;
-
-
 public class Strings {
 		
 	//Dialog Titles

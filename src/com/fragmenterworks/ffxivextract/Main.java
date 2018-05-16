@@ -1,15 +1,7 @@
 package com.fragmenterworks.ffxivextract;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.prefs.Preferences;
 
 import javax.swing.JOptionPane;
@@ -17,18 +9,10 @@ import javax.swing.UIManager;
 
 import com.fragmenterworks.ffxivextract.storage.HashDatabase;
 import com.fragmenterworks.ffxivextract.gui.FileManagerWindow;
-import com.fragmenterworks.ffxivextract.gui.components.EXDF_View;
 import com.fragmenterworks.ffxivextract.gui.components.Update_Dialog;
-import com.fragmenterworks.ffxivextract.helpers.DatBuilder;
-import com.fragmenterworks.ffxivextract.helpers.HashFinding_Utils;
-import com.fragmenterworks.ffxivextract.helpers.HavokNative;
-import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
 import com.fragmenterworks.ffxivextract.helpers.PathSearcher;
 import com.fragmenterworks.ffxivextract.helpers.VersionUpdater;
 import com.fragmenterworks.ffxivextract.helpers.VersionUpdater.VersionCheckObject;
-import com.fragmenterworks.ffxivextract.models.EXHF_File;
-import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
-import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_Folder;
 
 public class Main {
 

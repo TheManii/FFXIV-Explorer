@@ -1,6 +1,5 @@
 package com.fragmenterworks.ffxivextract.models;
 
-import com.fragmenterworks.ffxivextract.models.SqPack_DatFile.Data_Block;
 import com.fragmenterworks.ffxivextract.models.SqPack_DatFile.TextureBlocks;
 
 public class ContentType4Container {

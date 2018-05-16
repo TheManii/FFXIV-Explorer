@@ -3,6 +3,7 @@ package com.fragmenterworks.ffxivextract.gui.components;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -11,7 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;

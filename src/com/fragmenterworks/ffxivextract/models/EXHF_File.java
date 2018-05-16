@@ -8,9 +8,6 @@ import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class EXHF_File {	
 

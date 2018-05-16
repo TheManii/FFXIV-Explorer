@@ -1,6 +1,5 @@
 package com.fragmenterworks.ffxivextract.models;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Calendar;
@@ -8,9 +7,9 @@ import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 
-import com.fragmenterworks.ffxivextract.storage.HashDatabase;
 import com.fragmenterworks.ffxivextract.gui.components.Loading_Dialog;
 import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
+import com.fragmenterworks.ffxivextract.storage.HashDatabase;
 
 public class SqPack_IndexFile {
 
@@ -201,7 +200,7 @@ public class SqPack_IndexFile {
 		int headerLength = ref.readInt();				
 
 		for (int i = 0; i < segments.length; i++) {
-			int firstVal = ref.readInt();			
+			//int firstVal = ref.readInt();			
 			int offset = ref.readInt();
 			int size = ref.readInt();
 			byte[] sha1 = new byte[20];

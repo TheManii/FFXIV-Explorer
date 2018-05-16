@@ -5,10 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.ArrayList;
 
 import com.fragmenterworks.ffxivextract.Constants;
-
 import com.fragmenterworks.ffxivextract.models.directx.D3DXShader_ConstantTable;
 
 public class SHCD_File {

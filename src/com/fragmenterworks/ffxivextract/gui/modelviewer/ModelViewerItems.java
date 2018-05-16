@@ -1,6 +1,7 @@
 package com.fragmenterworks.ffxivextract.gui.modelviewer;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -10,13 +11,19 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.FlowLayout;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.AbstractListModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -24,35 +31,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.fragmenterworks.ffxivextract.storage.HashDatabase;
-import com.jogamp.opengl.GLCapabilities;
-import com.jogamp.opengl.GLProfile;
-import com.jogamp.opengl.awt.GLCanvas;
-import com.jogamp.opengl.util.FPSAnimator;
 
 import com.fragmenterworks.ffxivextract.gui.components.EXDF_View;
 import com.fragmenterworks.ffxivextract.gui.components.ModelRenderer;
 import com.fragmenterworks.ffxivextract.gui.components.OpenGL_View;
 import com.fragmenterworks.ffxivextract.helpers.SparseArray;
-import com.fragmenterworks.ffxivextract.helpers.Utils;
-import com.fragmenterworks.ffxivextract.models.EXHF_File;
 import com.fragmenterworks.ffxivextract.models.Model;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
+import com.fragmenterworks.ffxivextract.storage.HashDatabase;
 
-import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
-import javax.swing.border.TitledBorder;
-import javax.swing.UIManager;
-
-import java.awt.Color;
-import java.awt.FlowLayout;
-
-import javax.swing.border.EmptyBorder;
-import java.awt.Component;
+import com.jogamp.opengl.awt.GLCanvas;
+import com.jogamp.opengl.GLCapabilities;
+import com.jogamp.opengl.GLProfile;
+import com.jogamp.opengl.util.FPSAnimator;
 
 public class ModelViewerItems extends JPanel {
 	

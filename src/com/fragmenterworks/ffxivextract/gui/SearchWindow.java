@@ -1,12 +1,12 @@
 package com.fragmenterworks.ffxivextract.gui;
 
-import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.BufferUnderflowException;
@@ -32,7 +32,6 @@ import javax.xml.bind.DatatypeConverter;
 
 import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.Strings;
-
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_File;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_Folder;

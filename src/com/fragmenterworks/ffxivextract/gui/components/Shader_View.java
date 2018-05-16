@@ -1,31 +1,24 @@
 package com.fragmenterworks.ffxivextract.gui.components;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.JLabel;
-
 import java.awt.FlowLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.JComboBox;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.fragmenterworks.ffxivextract.models.Mesh;
 import com.fragmenterworks.ffxivextract.models.ParameterInfo;
 import com.fragmenterworks.ffxivextract.models.SHCD_File;
 import com.fragmenterworks.ffxivextract.models.SHPK_File;
 import com.fragmenterworks.ffxivextract.models.directx.D3DXShader_ConstantTable;
-
-import javax.swing.JScrollPane;
 
 public class Shader_View extends JPanel {
 

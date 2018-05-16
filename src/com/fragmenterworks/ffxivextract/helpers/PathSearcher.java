@@ -1,36 +1,15 @@
 package com.fragmenterworks.ffxivextract.helpers;
 
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuBar;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 
-import com.fragmenterworks.ffxivextract.Constants;
-import com.fragmenterworks.ffxivextract.Strings;
 import com.fragmenterworks.ffxivextract.storage.HashDatabase;
-
-import com.fragmenterworks.ffxivextract.models.SqPack_DatFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_File;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_Folder;
