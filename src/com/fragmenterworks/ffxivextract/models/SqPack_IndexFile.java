@@ -200,7 +200,7 @@ public class SqPack_IndexFile {
 		int headerLength = ref.readInt();				
 
 		for (int i = 0; i < segments.length; i++) {
-			//int firstVal = ref.readInt();			
+			int firstVal = ref.readInt();			
 			int offset = ref.readInt();
 			int size = ref.readInt();
 			byte[] sha1 = new byte[20];
