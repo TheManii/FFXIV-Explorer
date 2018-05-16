@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Hashtable;
+import java.util.prefs.Preferences;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
@@ -47,7 +48,7 @@ import com.fragmenterworks.ffxivextract.helpers.LERandomAccessFile;
 import com.fragmenterworks.ffxivextract.helpers.Utils;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile;
 import com.fragmenterworks.ffxivextract.models.SqPack_IndexFile.SqPack_File;
-
+import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.Strings;
 import com.google.gson.Gson;
 
@@ -60,7 +61,10 @@ public class MusicSwapperWindow extends JFrame {
 	private SqPack_IndexFile editMusicFile, originalMusicFile;
 	private SqPack_File[] editedFiles;	
 	private Hashtable<Integer, Integer> originalPositionTable = new Hashtable<Integer, Integer>(); //Fucking hack, but this is my fix if we want alphabetical sort
-	
+
+	Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
+	File lastOpenedIndexFile = null;
+
 	//CUSTOM MUSIC STUFF
 	private int currentDatIndex;
 	private String customDatPath;
@@ -106,7 +110,10 @@ public class MusicSwapperWindow extends JFrame {
 		URL imageURL = getClass().getResource("/res/frameicon.png");
 		ImageIcon image = new ImageIcon(imageURL);
 		this.setIconImage(image.getImage());
-		
+
+		if (prefs.get(Constants.PREF_LASTOPENED, null) != null)
+		lastOpenedIndexFile = new File(prefs.get(Constants.PREF_LASTOPENED, null));
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -523,7 +530,7 @@ public class MusicSwapperWindow extends JFrame {
 	}
 	
 	public void setPath() {
-		JFileChooser fileChooser = new JFileChooser(lastOpenedFile);
+		JFileChooser fileChooser = new JFileChooser(lastOpenedIndexFile);
 
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -561,6 +568,14 @@ public class MusicSwapperWindow extends JFrame {
 		fileChooser.setAcceptAllFileFilterUsed(false);
 
 		int retunval = fileChooser.showOpenDialog(MusicSwapperWindow.this);
+
+		if (retunval == JFileChooser.APPROVE_OPTION)
+		{
+			lastOpenedIndexFile = fileChooser.getSelectedFile();
+
+			Preferences prefs = Preferences.userNodeForPackage(com.fragmenterworks.ffxivextract.Main.class);
+			prefs.put(Constants.PREF_LASTOPENED, lastOpenedIndexFile.getAbsolutePath());					
+		}
 
 		if (retunval == JFileChooser.APPROVE_OPTION) {
 			try {
