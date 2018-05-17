@@ -53,6 +53,7 @@ Building from source
 * Software Requirements
     * A suitable JDK
         * OpenJDK 1.8-RedHat
+            > OpenJDK 10-RedHat is **NOT** compatible and will produce build errors
         * Java SE JDK 1.8
     * An active internet connection (When compiling with Maven/VS Code)
 
