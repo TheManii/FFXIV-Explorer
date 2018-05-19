@@ -36,7 +36,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.bric.swing.ColorPicker;
+import com.bric.colorpicker.ColorPickerDialog;
 
 import com.fragmenterworks.ffxivextract.Constants;
 import com.fragmenterworks.ffxivextract.gui.components.EXDF_View;
@@ -290,7 +290,7 @@ public class Outfitter extends JPanel {
 		     public void mouseClicked(MouseEvent mouseEvent) {
 		         int count = mouseEvent.getClickCount();
 		         if (count == 1) {
-		        	 Color newColor = ColorPicker.showDialog(
+		        	 Color newColor = ColorPickerDialog.showDialog(
 		        			 Outfitter.this.parent, hairColor);
 		        	 hairColor = newColor;
 		        	 btnHairColor.setBackground(hairColor);
@@ -311,7 +311,7 @@ public class Outfitter extends JPanel {
 		     public void mouseClicked(MouseEvent mouseEvent) {
 		         int count = mouseEvent.getClickCount();
 		         if (count == 1) {
-		        	 Color newColor = ColorPicker.showDialog(
+		        	 Color newColor = ColorPickerDialog.showDialog(
 		        		     Outfitter.this.parent, highlightColor);
 		        	 highlightColor = newColor;
 		        	 btnHighlightColor.setBackground(highlightColor);
@@ -338,7 +338,7 @@ public class Outfitter extends JPanel {
 		     public void mouseClicked(MouseEvent mouseEvent) {
 		         int count = mouseEvent.getClickCount();
 		         if (count == 1) {
-		        	 Color newColor = ColorPicker.showDialog(
+		        	 Color newColor = ColorPickerDialog.showDialog(
 		        		     Outfitter.this.parent, eyeColor);
 		        	 eyeColor = newColor;
 		        	 btnEyeColor.setBackground(eyeColor);

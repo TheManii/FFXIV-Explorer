@@ -86,6 +86,7 @@ Building from source
             * JOAMP JOGL 2.3.2/b1473 (and all subpackages)
             * JOAMP Gluegen 2.3.2/b904 (and all subpackages)
             * Google Gson 2.8.4
+            * Dheid Colorpicker 1.1
         * Add dependency JARs to `<path to source code>\libs`
             > Place the JARs directly in `libs`, do not include folders
         * Go to `Build` → `Build Artifacts`
