@@ -8,11 +8,11 @@ import javax.swing.UIManager;
 public class Constants {
 
 	public static final String APPNAME = "FFXIV File Explorer";
-	public static final String VERSION = "v1.8-18051600";
+	public static final String VERSION = "v1.8-18051800";
 	public static final int APP_VERSION_CODE = 10;
 	public static final int DB_VERSION_CODE = 10;	
 	
-	public static final String COMMIT = "dc09d96ad7cb6c45cedceae411384ed9fa87fc40";
+	public static final String COMMIT = "b5ba38387a01e7fc2bb7d9a5b2a76ff7fa2d34b2";
 	public static boolean HAVOK_ENABLED = false;
 	public static boolean DEBUG = false;
 	public static boolean EASTER_EGG = false;
