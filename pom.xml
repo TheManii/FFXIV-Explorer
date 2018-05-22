@@ -28,6 +28,14 @@
                     <exclude>res/Thumbs.db</exclude>
                 </excludes>
             </resource>
+            <resource>
+                <!-- Copy the license files -->
+                <directory>.</directory>
+                <includes>
+                    <include>NOTICE</include>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
         </resources>
 
         <plugins>
@@ -86,6 +94,14 @@
                                 <resource>
                                     <directory>resources</directory>
                                     <filtering>false</filtering>
+                                </resource>
+                                <resource>
+                                    <!-- Copy the license files -->
+                                    <directory>.</directory>
+                                    <includes>
+                                        <include>NOTICE</include>
+                                        <include>LICENSE</include>
+                                    </includes>
                                 </resource>
                             </resources>
                         </configuration>
